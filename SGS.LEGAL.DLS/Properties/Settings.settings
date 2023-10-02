@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SGS.LEGAL.DLS.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BOSS_PATH_SGS" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BOSS_PATH_TIS" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BOSS_PATH_FET" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BOSS_PATH_CCS" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FILE_FORMAT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ageing-{0}支票查詢Cost_Center_{1}.xlsx</Value>
+    </Setting>
+    <Setting Name="SGS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">台檢</Value>
+    </Setting>
+    <Setting Name="TIS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">台工</Value>
+    </Setting>
+    <Setting Name="FET" Type="System.String" Scope="User">
+      <Value Profile="(Default)">遠東</Value>
+    </Setting>
+    <Setting Name="CCS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">程智</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
