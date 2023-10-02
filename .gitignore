@@ -1,0 +1,5 @@
+.svn/
+.vs/
+.vscode/
+**/bin/
+**/obj/
