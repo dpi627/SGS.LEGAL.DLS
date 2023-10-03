@@ -20,8 +20,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGS.LEGAL.DLS.Service", "SG
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{97DE0EE1-C57E-42FB-9D96-EB1B5B5BB21E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,14 +80,6 @@ Global
 		{97DE0EE1-C57E-42FB-9D96-EB1B5B5BB21E}.Debug|x86.ActiveCfg = Debug
 		{97DE0EE1-C57E-42FB-9D96-EB1B5B5BB21E}.Release|Any CPU.ActiveCfg = Release
 		{97DE0EE1-C57E-42FB-9D96-EB1B5B5BB21E}.Release|x86.ActiveCfg = Release
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Debug|x86.Build.0 = Debug|Any CPU
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Release|x86.ActiveCfg = Release|Any CPU
-		{28923DD9-D5D3-4AA2-9F61-99E61611BD2D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
