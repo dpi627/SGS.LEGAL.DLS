@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGS.LEGAL.DLS.Repository.DataModel
 {
-    internal class OptLogDataModel
+    public class OptLogDataModel
     {
     }
 }

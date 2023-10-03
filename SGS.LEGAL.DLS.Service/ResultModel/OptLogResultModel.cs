@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGS.LEGAL.DLS.Service.ResultModel
 {
-    internal class OptLogResultModel
+    public record OptLogResultModel
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SGS.LEGAL.DLS.Service.Info
+namespace SGS.LEGAL.DLS.Repository.Condition
 {
-    public record OptLogInfo
+    public record OptLogCondition
     {
     }
 }
