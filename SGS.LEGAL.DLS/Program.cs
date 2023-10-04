@@ -1,5 +1,6 @@
 using Serilog;
 using SGS.LEGAL.DLS.Model;
+using SGS.LEGAL.DLS.Service;
 using SGS.LIB.Common;
 using System.Diagnostics;
 
@@ -31,6 +32,25 @@ namespace SGS.LEGAL.DLS
                 Debugger.Break();
             });
 #endif
+            #endregion
+
+            #region 系統允許執行時間判斷
+            // 取得參數表允許執行時間，嘗試轉為整數，如失敗設定為預設值
+            using SysParamService svc = new(null);
+            int.TryParse(svc.Get("TIME_START")!.FirstOrDefault()!.P_VAL, out int startHour);
+            int.TryParse(svc.Get("TIME_END")!.FirstOrDefault()!.P_VAL, out int endHour);
+            if (startHour ==0 || endHour == 0)
+            {
+                startHour = 10;
+                endHour = 21;
+            }
+            // 取得當前時間進行比較
+            int currentHour = DateTime.Now.Hour;
+            if (currentHour < startHour || currentHour > endHour)
+            {
+                MessageBox.Show($"資料處理中...{Environment.NewLine}{Environment.NewLine}請於每日 {startHour} 時至 {endHour} 時之間執行");
+                return;
+            }
             #endregion
 
             #region 建立表單設定
