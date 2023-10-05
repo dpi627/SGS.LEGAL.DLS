@@ -57,12 +57,11 @@
             dgvDocLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDocLog.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDocLog.Columns.AddRange(new DataGridViewColumn[] { View, CompanyName, BossNo, CustomerNo, CustomerName, FileTypeName, LetterTypeName, EmployeeId, CreateUser, CreateTime, BackupPath, LetterType, FileType });
-            dgvDocLog.Location = new Point(9, 51);
-            dgvDocLog.Margin = new Padding(0);
+            dgvDocLog.Location = new Point(12, 53);
             dgvDocLog.Name = "dgvDocLog";
             dgvDocLog.ReadOnly = true;
             dgvDocLog.RowTemplate.Height = 25;
-            dgvDocLog.Size = new Size(1071, 512);
+            dgvDocLog.Size = new Size(893, 507);
             dgvDocLog.TabIndex = 0;
             dgvDocLog.CellContentClick += dgvDocLog_CellContentClick;
             // 
@@ -163,6 +162,7 @@
             // 
             // btnSearch
             // 
+            btnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSearch.BackColor = Color.Tomato;
             btnSearch.FlatAppearance.BorderSize = 0;
             btnSearch.FlatStyle = FlatStyle.Flat;
@@ -174,10 +174,10 @@
             btnSearch.IconSize = 20;
             btnSearch.ImageAlign = ContentAlignment.BottomLeft;
             btnSearch.Location = new Point(840, 12);
-            btnSearch.Margin = new Padding(0, 4, 0, 10);
+            btnSearch.Margin = new Padding(0, 3, 3, 3);
             btnSearch.Name = "btnSearch";
             btnSearch.Padding = new Padding(3, 0, 0, 0);
-            btnSearch.Size = new Size(67, 28);
+            btnSearch.Size = new Size(65, 28);
             btnSearch.TabIndex = 2;
             btnSearch.Text = "搜尋";
             btnSearch.TextAlign = ContentAlignment.MiddleRight;
@@ -214,6 +214,7 @@
             // 
             // txtKeyword
             // 
+            txtKeyword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtKeyword.Location = new Point(461, 12);
             txtKeyword.Margin = new Padding(0, 3, 0, 3);
             txtKeyword.Name = "txtKeyword";
@@ -225,7 +226,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1089, 572);
+            ClientSize = new Size(917, 572);
             Controls.Add(txtKeyword);
             Controls.Add(cbbCompany);
             Controls.Add(dtpEndDate);
