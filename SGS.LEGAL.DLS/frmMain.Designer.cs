@@ -236,7 +236,7 @@
             panTitle.Location = new Point(200, 3);
             panTitle.Margin = new Padding(0);
             panTitle.Name = "panTitle";
-            panTitle.Size = new Size(684, 50);
+            panTitle.Size = new Size(919, 50);
             panTitle.TabIndex = 1;
             // 
             // labTitle
@@ -256,7 +256,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { labVersion, labSapce, labUser });
             statusStrip1.Location = new Point(0, 539);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(884, 22);
+            statusStrip1.Size = new Size(1119, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -273,7 +273,7 @@
             // 
             labSapce.BackColor = Color.Transparent;
             labSapce.Name = "labSapce";
-            labSapce.Size = new Size(804, 17);
+            labSapce.Size = new Size(1039, 17);
             labSapce.Spring = true;
             // 
             // labUser
@@ -290,7 +290,7 @@
             progressBar1.Location = new Point(0, 0);
             progressBar1.Margin = new Padding(0);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(884, 3);
+            progressBar1.Size = new Size(1119, 3);
             progressBar1.TabIndex = 3;
             progressBar1.Value = 100;
             // 
@@ -300,14 +300,14 @@
             panContent.Location = new Point(200, 53);
             panContent.Margin = new Padding(0);
             panContent.Name = "panContent";
-            panContent.Size = new Size(684, 486);
+            panContent.Size = new Size(919, 486);
             panContent.TabIndex = 4;
             // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(10F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(884, 561);
+            ClientSize = new Size(1119, 561);
             Controls.Add(panContent);
             Controls.Add(progressBar1);
             Controls.Add(statusStrip1);
@@ -316,7 +316,7 @@
             Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
-            MinimumSize = new Size(900, 600);
+            MinimumSize = new Size(1135, 600);
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SGS.LEGAL.DLS";

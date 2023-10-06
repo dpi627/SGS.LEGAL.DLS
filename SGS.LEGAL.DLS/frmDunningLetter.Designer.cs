@@ -58,11 +58,12 @@
             // 
             // txtKeyword
             // 
+            txtKeyword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtKeyword.Location = new Point(461, 12);
             txtKeyword.Margin = new Padding(0, 3, 0, 3);
             txtKeyword.Name = "txtKeyword";
             txtKeyword.PlaceholderText = "Boss、統編或客戶名稱";
-            txtKeyword.Size = new Size(379, 28);
+            txtKeyword.Size = new Size(474, 28);
             txtKeyword.TabIndex = 0;
             txtKeyword.KeyDown += txtKeyword_KeyDown;
             // 
@@ -79,7 +80,7 @@
             dgvBossDaily.ReadOnly = true;
             dgvBossDaily.RowHeadersWidth = 30;
             dgvBossDaily.RowTemplate.Height = 32;
-            dgvBossDaily.Size = new Size(1129, 576);
+            dgvBossDaily.Size = new Size(990, 576);
             dgvBossDaily.TabIndex = 1;
             dgvBossDaily.TabStop = false;
             // 
@@ -184,6 +185,7 @@
             // 
             // btnSearch
             // 
+            btnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSearch.BackColor = Color.Tomato;
             btnSearch.FlatAppearance.BorderSize = 0;
             btnSearch.FlatStyle = FlatStyle.Flat;
@@ -194,8 +196,8 @@
             btnSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSearch.IconSize = 20;
             btnSearch.ImageAlign = ContentAlignment.BottomLeft;
-            btnSearch.Location = new Point(840, 12);
-            btnSearch.Margin = new Padding(0, 4, 0, 4);
+            btnSearch.Location = new Point(935, 12);
+            btnSearch.Margin = new Padding(0, 3, 3, 3);
             btnSearch.Name = "btnSearch";
             btnSearch.Padding = new Padding(3, 0, 0, 0);
             btnSearch.Size = new Size(67, 28);
@@ -218,7 +220,7 @@
             btnNTF.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnNTF.IconSize = 28;
             btnNTF.ImageAlign = ContentAlignment.BottomLeft;
-            btnNTF.Location = new Point(815, 642);
+            btnNTF.Location = new Point(676, 642);
             btnNTF.Name = "btnNTF";
             btnNTF.Padding = new Padding(3, 0, 0, 0);
             btnNTF.Size = new Size(100, 40);
@@ -241,7 +243,7 @@
             btnDUN.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnDUN.IconSize = 28;
             btnDUN.ImageAlign = ContentAlignment.BottomLeft;
-            btnDUN.Location = new Point(923, 642);
+            btnDUN.Location = new Point(784, 642);
             btnDUN.Name = "btnDUN";
             btnDUN.Padding = new Padding(3, 0, 0, 0);
             btnDUN.Size = new Size(100, 40);
@@ -264,7 +266,7 @@
             btnDPS.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnDPS.IconSize = 28;
             btnDPS.ImageAlign = ContentAlignment.BottomLeft;
-            btnDPS.Location = new Point(1031, 642);
+            btnDPS.Location = new Point(892, 642);
             btnDPS.Name = "btnDPS";
             btnDPS.Padding = new Padding(3, 0, 0, 0);
             btnDPS.Size = new Size(110, 40);
@@ -343,7 +345,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1153, 694);
+            ClientSize = new Size(1014, 694);
             Controls.Add(chkOnlyTWD);
             Controls.Add(btnAbnormal);
             Controls.Add(dtpEndDate);

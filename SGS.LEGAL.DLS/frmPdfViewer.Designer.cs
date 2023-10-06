@@ -52,7 +52,7 @@
             pdfViewer1.Margin = new Padding(0, 0, 0, 10);
             pdfViewer1.Name = "pdfViewer1";
             pdfViewer1.ShowToolbar = false;
-            pdfViewer1.Size = new Size(1010, 499);
+            pdfViewer1.Size = new Size(1120, 499);
             pdfViewer1.TabIndex = 0;
             // 
             // btnApprove
@@ -61,7 +61,7 @@
             btnApprove.BackColor = Color.Tomato;
             btnApprove.FlatStyle = FlatStyle.Flat;
             btnApprove.ForeColor = Color.White;
-            btnApprove.Location = new Point(806, 510);
+            btnApprove.Location = new Point(916, 510);
             btnApprove.Name = "btnApprove";
             btnApprove.Padding = new Padding(3);
             btnApprove.Size = new Size(107, 39);
@@ -76,7 +76,7 @@
             btnCancel.BackColor = Color.Tomato;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(919, 510);
+            btnCancel.Location = new Point(1029, 510);
             btnCancel.Name = "btnCancel";
             btnCancel.Padding = new Padding(3);
             btnCancel.Size = new Size(78, 39);
@@ -215,7 +215,7 @@
             btnReprint.BackColor = Color.Tomato;
             btnReprint.FlatStyle = FlatStyle.Flat;
             btnReprint.ForeColor = Color.White;
-            btnReprint.Location = new Point(835, 510);
+            btnReprint.Location = new Point(945, 510);
             btnReprint.Name = "btnReprint";
             btnReprint.Padding = new Padding(3);
             btnReprint.Size = new Size(78, 39);
@@ -231,7 +231,7 @@
             btnDownload.BackColor = Color.Tomato;
             btnDownload.FlatStyle = FlatStyle.Flat;
             btnDownload.ForeColor = Color.White;
-            btnDownload.Location = new Point(835, 511);
+            btnDownload.Location = new Point(945, 511);
             btnDownload.Name = "btnDownload";
             btnDownload.Padding = new Padding(3);
             btnDownload.Size = new Size(78, 39);
@@ -245,7 +245,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1009, 561);
+            ClientSize = new Size(1119, 561);
             Controls.Add(btnDownload);
             Controls.Add(btnReprint);
             Controls.Add(txtFileType);
@@ -263,6 +263,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             MinimizeBox = false;
+            MinimumSize = new Size(930, 600);
             Name = "frmPdfViewer";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;

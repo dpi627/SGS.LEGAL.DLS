@@ -32,8 +32,9 @@ namespace SGS.LEGAL.DLS
                 Debugger.Break();
             });
 #endif
-            #endregion
+#endregion
 
+#if RELEASE
             #region 系統允許執行時間判斷
             // 取得參數表允許執行時間，嘗試轉為整數，如失敗設定為預設值
             using SysParamService svc = new(null);
@@ -52,7 +53,7 @@ namespace SGS.LEGAL.DLS
                 return;
             }
             #endregion
-
+#endif
             #region 建立表單設定
             FormConfig config = new FormConfig()
                 .SetCurrentUser()   // 設定目前使用者
