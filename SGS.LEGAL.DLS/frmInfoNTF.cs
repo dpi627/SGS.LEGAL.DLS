@@ -17,6 +17,7 @@ namespace SGS.LEGAL.DLS
             this._cst = cst;
             this._type = type;
             txtCST_DEPT.KeyDown += CheckKeyDown;
+            txtCST_POST_CODE.KeyDown += CheckKeyDown;
             txtCST_ADDR.KeyDown += CheckKeyDown;
         }
 
@@ -42,7 +43,7 @@ namespace SGS.LEGAL.DLS
 
         private void frmInfoNTF_Shown(object sender, EventArgs e)
         {
-            txtCST_ADDR.Focus();
+            txtCST_POST_CODE.Focus();
         }
 
         /// <summary>
@@ -114,25 +115,19 @@ namespace SGS.LEGAL.DLS
 
         private bool IsDataVaild()
         {
-            if (string.IsNullOrWhiteSpace(txtCST_DEPT.Text))
-            {
-                txtCST_DEPT.Focus();
-                return u.ShowMsg("請填寫客戶部門");
-            }
+            if (u.IsVaild(ref txtCST_DEPT) &&
+                u.IsVaild(ref txtCST_POST_CODE, @"^[0-9]{3,6}$") && // 檢查是否匹配 3-6 碼數字
+                u.IsVaild(ref txtCST_ADDR))
+                return true;
 
-            if (string.IsNullOrWhiteSpace(txtCST_ADDR.Text))
-            {
-                txtCST_ADDR.Focus();
-                return u.ShowMsg("請填寫客戶地址");
-            }
-
-            return true;
+            return false;
         }
 
         private void InitData()
         {
             txtCST_NM.Text = _cst.CST_NM;
             txtCST_DEPT.Text = _cst.CST_DEPT;
+            txtCST_POST_CODE.Text = _cst.CST_POST_CODE;
             txtCST_ADDR.Text = _cst.CST_ADDR;
             txtCST_NO.Text = _cst.CST_NO;
             txtBOSS_NO.Text = _cst.BOSS_NO;
@@ -143,6 +138,7 @@ namespace SGS.LEGAL.DLS
             _cst.CST_NM = txtCST_NM.Text;
             _cst.CST_DEPT = txtCST_DEPT.Text;
             _cst.CST_ADDR = txtCST_ADDR.Text;
+            _cst.CST_POST_CODE = txtCST_POST_CODE.Text;
             _cst.CST_NO = txtCST_NO.Text;
             _cst.BOSS_NO = txtBOSS_NO.Text;
             _cst.NOTICE = labNotice.Text;
