@@ -386,15 +386,18 @@ namespace SGS.LEGAL.DLS
 
             // 建立收件回執結構
             ReceiptModel? dataRcv = new ReceiptModel(
+                contact.RCV_POST_CODE,
                 contact.RCV_ADDR,
                 contact.RCV_NM,
-                contact.COM_ADDR,
+                contact.COM_POST_CODE,  //收件回執之收件地址一律用總公司地址資料
+                contact.COM_ADDR,       //收件回執之收件地址一律用總公司地址資料
                 contact.SND_NM,
                 info.USR_NM,
                 info.EXT
                 );
             // 建立信封結構
             EnvelopeModel? dataEnv = new EnvelopeModel(
+                contact.RCV_POST_CODE,
                 contact.RCV_ADDR,
                 contact.RCV_NM,
                 info.USR_NM,

@@ -24,8 +24,10 @@ namespace SGS.LEGAL.DLS
         {
             ccbCompany_SelectedIndexChanged(null, null);
             txtReceiverCEO.KeyDown += CheckKeyDown;
+            txtReceiverPostCode.KeyDown += CheckKeyDown;
             txtReceiverAddress.KeyDown += CheckKeyDown;
             txtCcName.KeyDown += CheckKeyDown;
+            txtCcPostCode.KeyDown += CheckKeyDown;
             txtCcAddress.KeyDown += CheckKeyDown;
         }
 
@@ -66,48 +68,55 @@ namespace SGS.LEGAL.DLS
 
         private bool IsDataVaild()
         {
-            if (string.IsNullOrWhiteSpace(txtReceiverCEO.Text))
+            // 如果有填寫任一副本欄位，就需要檢查所有副本資料
+            if (!string.IsNullOrWhiteSpace(txtCcName.Text) ||
+                !string.IsNullOrWhiteSpace(txtCcPostCode.Text) ||
+                !string.IsNullOrWhiteSpace(txtCcAddress.Text))
             {
-                txtReceiverCEO.Focus();
-                return u.ShowMsg("請填寫收件人公司代表人");
+                u.IsVaild(ref txtCcName);
+                u.IsVaild(ref txtCcPostCode, @"^[0-9]{3,6}$");
+                u.IsVaild(ref txtCcAddress);
             }
 
-            if (string.IsNullOrWhiteSpace(txtReceiverAddress.Text))
-            {
-                txtReceiverAddress.Focus();
-                return u.ShowMsg("請填寫收件人地址");
-            }
+            if (u.IsVaild(ref txtReceiverCEO) &&
+                u.IsVaild(ref txtReceiverPostCode, @"^[0-9]{3,6}$") && // 檢查是否匹配 3-6 碼數字
+                u.IsVaild(ref txtReceiverAddress))
+                return true;
 
-            return true;
+            return false;
         }
 
-        private bool CheckTextBox(ref TextBox textBox)
-        {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                textBox.Focus();
-                return false;
-            }
-            return true;
-        }
+        //private bool CheckTextBox(ref TextBox textBox)
+        //{
+        //    if (string.IsNullOrWhiteSpace(textBox.Text))
+        //    {
+        //        textBox.Focus();
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         private void SetData()
         {
             DepositContact.SND_NM = txtSenderName.Text;
+            DepositContact.SND_POST_CODE = txtSenderPostCode.Text;
             DepositContact.SND_ADDR = txtSenderAddress.Text;
             DepositContact.SND_CEO = txtSenderCEO.Text;
             DepositContact.RCV_NM = txtReceiverName.Text;
+            DepositContact.RCV_POST_CODE = txtReceiverPostCode.Text;
             DepositContact.RCV_ADDR = txtReceiverAddress.Text;
             DepositContact.RCV_CEO = txtReceiverCEO.Text;
             DepositContact.CC_NM = txtCcName.Text;
+            DepositContact.CC_POST_CODE = txtCcPostCode.Text;
             DepositContact.CC_ADDR = txtCcAddress.Text;
 
             /// 無論總公司或分公司，收件回執之收件地址皆為總公司地址
             /// 總公司抓公司列表中，"無"分公司代碼(BRANCH_CODE)之資料
-            DepositContact.COM_ADDR = lstCompany
+            COMPANY com = lstCompany
                 .Where(x => string.IsNullOrWhiteSpace(x.BRANCH_CODE))
-                .FirstOrDefault()!
-                .COM_ADDR!;
+                .FirstOrDefault()!;
+            DepositContact.COM_POST_CODE = com.COM_POST_CODE;
+            DepositContact.COM_ADDR = com.COM_ADDR;
         }
 
         private void InitData()
@@ -131,6 +140,7 @@ namespace SGS.LEGAL.DLS
                 {
                     txtSenderName.Text = com.COM_NM;
                     txtSenderCEO.Text = com.CEO;
+                    txtSenderPostCode.Text = com.BUS_POST_CODE;
                     txtSenderAddress.Text = com.BUS_REG_ADDR;
                 }
             }
