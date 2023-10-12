@@ -40,6 +40,7 @@
             txtBOSS_NO = new TextBox();
             btnSave = new FontAwesome.Sharp.IconButton();
             groupBox1 = new GroupBox();
+            txtCST_POST_CODE = new TextBox();
             flowPanel = new FlowLayoutPanel();
             groupBox2 = new GroupBox();
             labNotice = new Label();
@@ -106,16 +107,18 @@
             // 
             txtCST_DEPT.Location = new Point(92, 58);
             txtCST_DEPT.Name = "txtCST_DEPT";
+            txtCST_DEPT.PlaceholderText = "客戶部門";
             txtCST_DEPT.Size = new Size(160, 28);
-            txtCST_DEPT.TabIndex = 8;
+            txtCST_DEPT.TabIndex = 1;
             // 
             // txtCST_ADDR
             // 
             txtCST_ADDR.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtCST_ADDR.Location = new Point(92, 92);
+            txtCST_ADDR.Location = new Point(184, 92);
             txtCST_ADDR.Name = "txtCST_ADDR";
-            txtCST_ADDR.Size = new Size(485, 28);
-            txtCST_ADDR.TabIndex = 9;
+            txtCST_ADDR.PlaceholderText = "客戶地址";
+            txtCST_ADDR.Size = new Size(393, 28);
+            txtCST_ADDR.TabIndex = 3;
             // 
             // txtCST_NO
             // 
@@ -161,6 +164,7 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(txtCST_POST_CODE);
             groupBox1.Controls.Add(txtCST_NM);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(txtBOSS_NO);
@@ -178,6 +182,15 @@
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "客戶資料";
+            // 
+            // txtCST_POST_CODE
+            // 
+            txtCST_POST_CODE.Location = new Point(92, 92);
+            txtCST_POST_CODE.Name = "txtCST_POST_CODE";
+            txtCST_POST_CODE.PlaceholderText = "郵遞區號";
+            txtCST_POST_CODE.Size = new Size(86, 28);
+            txtCST_POST_CODE.TabIndex = 2;
+            txtCST_POST_CODE.TextAlign = HorizontalAlignment.Center;
             // 
             // flowPanel
             // 
@@ -252,5 +265,6 @@
         private FlowLayoutPanel flowPanel;
         private GroupBox groupBox2;
         private Label labNotice;
+        private TextBox txtCST_POST_CODE;
     }
 }

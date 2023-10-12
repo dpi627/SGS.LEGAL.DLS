@@ -48,6 +48,9 @@
             txtCcAddress = new TextBox();
             txtCcName = new TextBox();
             label6 = new Label();
+            txtCcPostCode = new TextBox();
+            txtReceiverPostCode = new TextBox();
+            txtSenderPostCode = new TextBox();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
@@ -79,6 +82,7 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(txtSenderPostCode);
             groupBox2.Controls.Add(txtSenderCEO);
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(ccbCompany);
@@ -137,10 +141,10 @@
             // txtSenderAddress
             // 
             txtSenderAddress.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtSenderAddress.Location = new Point(60, 102);
+            txtSenderAddress.Location = new Point(152, 102);
             txtSenderAddress.Name = "txtSenderAddress";
             txtSenderAddress.ReadOnly = true;
-            txtSenderAddress.Size = new Size(487, 28);
+            txtSenderAddress.Size = new Size(395, 28);
             txtSenderAddress.TabIndex = 18;
             // 
             // txtSenderName
@@ -164,6 +168,7 @@
             // groupBox3
             // 
             groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox3.Controls.Add(txtReceiverPostCode);
             groupBox3.Controls.Add(txtReceiverCEO);
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(txtReceiverAddress);
@@ -182,7 +187,7 @@
             txtReceiverCEO.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtReceiverCEO.Location = new Point(444, 34);
             txtReceiverCEO.Name = "txtReceiverCEO";
-            txtReceiverCEO.PlaceholderText = "(公司代表人)";
+            txtReceiverCEO.PlaceholderText = "公司代表人";
             txtReceiverCEO.Size = new Size(103, 28);
             txtReceiverCEO.TabIndex = 1;
             txtReceiverCEO.TextAlign = HorizontalAlignment.Center;
@@ -199,10 +204,11 @@
             // txtReceiverAddress
             // 
             txtReceiverAddress.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtReceiverAddress.Location = new Point(60, 68);
+            txtReceiverAddress.Location = new Point(152, 68);
             txtReceiverAddress.Name = "txtReceiverAddress";
-            txtReceiverAddress.Size = new Size(487, 28);
-            txtReceiverAddress.TabIndex = 2;
+            txtReceiverAddress.PlaceholderText = "收件人地址";
+            txtReceiverAddress.Size = new Size(395, 28);
+            txtReceiverAddress.TabIndex = 3;
             // 
             // txtReceiverName
             // 
@@ -225,6 +231,7 @@
             // groupBox4
             // 
             groupBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox4.Controls.Add(txtCcPostCode);
             groupBox4.Controls.Add(label5);
             groupBox4.Controls.Add(txtCcAddress);
             groupBox4.Controls.Add(txtCcName);
@@ -249,18 +256,20 @@
             // txtCcAddress
             // 
             txtCcAddress.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtCcAddress.Location = new Point(60, 68);
+            txtCcAddress.Location = new Point(152, 68);
             txtCcAddress.Name = "txtCcAddress";
-            txtCcAddress.Size = new Size(487, 28);
-            txtCcAddress.TabIndex = 4;
+            txtCcAddress.PlaceholderText = "副本收件地址";
+            txtCcAddress.Size = new Size(395, 28);
+            txtCcAddress.TabIndex = 6;
             // 
             // txtCcName
             // 
             txtCcName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtCcName.Location = new Point(60, 34);
             txtCcName.Name = "txtCcName";
+            txtCcName.PlaceholderText = "副本收件人";
             txtCcName.Size = new Size(487, 28);
-            txtCcName.TabIndex = 3;
+            txtCcName.TabIndex = 4;
             // 
             // label6
             // 
@@ -270,6 +279,34 @@
             label6.Size = new Size(41, 20);
             label6.TabIndex = 17;
             label6.Text = "姓名";
+            // 
+            // txtCcPostCode
+            // 
+            txtCcPostCode.Location = new Point(60, 68);
+            txtCcPostCode.Name = "txtCcPostCode";
+            txtCcPostCode.PlaceholderText = "郵遞區號";
+            txtCcPostCode.Size = new Size(86, 28);
+            txtCcPostCode.TabIndex = 5;
+            txtCcPostCode.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtReceiverPostCode
+            // 
+            txtReceiverPostCode.Location = new Point(60, 68);
+            txtReceiverPostCode.Name = "txtReceiverPostCode";
+            txtReceiverPostCode.PlaceholderText = "郵遞區號";
+            txtReceiverPostCode.Size = new Size(86, 28);
+            txtReceiverPostCode.TabIndex = 2;
+            txtReceiverPostCode.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtSenderPostCode
+            // 
+            txtSenderPostCode.Location = new Point(60, 102);
+            txtSenderPostCode.Name = "txtSenderPostCode";
+            txtSenderPostCode.PlaceholderText = "郵遞區號";
+            txtSenderPostCode.ReadOnly = true;
+            txtSenderPostCode.Size = new Size(86, 28);
+            txtSenderPostCode.TabIndex = 21;
+            txtSenderPostCode.TextAlign = HorizontalAlignment.Center;
             // 
             // frmInfoDPS
             // 
@@ -319,5 +356,8 @@
         private Label label10;
         private TextBox txtReceiverCEO;
         private TextBox txtSenderCEO;
+        private TextBox txtSenderPostCode;
+        private TextBox txtReceiverPostCode;
+        private TextBox txtCcPostCode;
     }
 }
