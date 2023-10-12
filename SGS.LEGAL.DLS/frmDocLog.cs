@@ -66,8 +66,17 @@ namespace SGS.LEGAL.DLS
 
         private void GetDocLog()
         {
+            DocLogParameter? param = GetParameter();
+
+            Utility.AddLog(
+                OptLogType.Search,
+                CurrentUser!,
+                this.GetType().Name,
+                param.ToString()
+                );
+
             // 搜尋條件轉換為 Info
-            var info = _mapper.Map<DocLogInfo>(GetParameter());
+            var info = _mapper.Map<DocLogInfo>(param);
             // 建立服務
             using DocLogService svc = new DocLogService(CurrentUser);
             // 取得資料 (帶入 Info，回傳為 ResultModel)
@@ -85,7 +94,7 @@ namespace SGS.LEGAL.DLS
         /// <param name="isAutoDelete">自動刪除，預設否 (檔案留作快取避免重複下載)</param>
         private void ViewPdf(Letter letter, bool isAutoDelete = false)
         {
-            Log.Information($"View Pdf");
+            Utility.AddLog(OptLogType.View, CurrentUser!, this.GetType().Name, letter.ToString());
             // 檢視 PDF，注意必須是檢視模式，不同模式取用路徑不同
             using frmPdfViewer frmPreview = new(letter, config, frmPdfViewer.OptMode.View);
             DialogResult result = frmPreview.ShowDialog();
@@ -107,6 +116,7 @@ namespace SGS.LEGAL.DLS
                 }
                 else if (letter.LetterType == Model.LetterType.NTF)
                 {
+                    Utility.AddLog(OptLogType.Download, CurrentUser!, this.GetType().Name, letter.ToString());
                     using FileService svc = new FileService(CurrentUser);
                     string downloadPath = svc.CopyFileToDownload(letter.ReviewTempPath);
                     MessageBox.Show($"檔案已經下載，將為您自動開啟路徑：{Environment.NewLine}{downloadPath}", "系統訊息", MessageBoxButtons.OK, MessageBoxIcon.Information);

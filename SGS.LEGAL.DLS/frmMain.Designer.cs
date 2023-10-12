@@ -108,7 +108,7 @@
             btnDataImport.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnDataImport.IconSize = 36;
             btnDataImport.ImageAlign = ContentAlignment.BottomLeft;
-            btnDataImport.Location = new Point(0, 50);
+            btnDataImport.Location = new Point(0, 200);
             btnDataImport.Margin = new Padding(0);
             btnDataImport.Name = "btnDataImport";
             btnDataImport.Padding = new Padding(10, 0, 10, 0);
@@ -141,7 +141,7 @@
             btnHistory.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnHistory.IconSize = 36;
             btnHistory.ImageAlign = ContentAlignment.BottomLeft;
-            btnHistory.Location = new Point(0, 150);
+            btnHistory.Location = new Point(0, 100);
             btnHistory.Margin = new Padding(0);
             btnHistory.Name = "btnHistory";
             btnHistory.Padding = new Padding(10, 0, 10, 0);
@@ -156,7 +156,6 @@
             // 
             btnUsage.AccessibleRole = AccessibleRole.None;
             btnUsage.BackColor = Color.DarkGray;
-            btnUsage.Enabled = false;
             btnUsage.FlatAppearance.BorderSize = 0;
             btnUsage.FlatAppearance.MouseOverBackColor = Color.Tomato;
             btnUsage.FlatStyle = FlatStyle.Flat;
@@ -167,13 +166,13 @@
             btnUsage.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnUsage.IconSize = 36;
             btnUsage.ImageAlign = ContentAlignment.BottomLeft;
-            btnUsage.Location = new Point(0, 200);
+            btnUsage.Location = new Point(0, 150);
             btnUsage.Margin = new Padding(0);
             btnUsage.Name = "btnUsage";
             btnUsage.Padding = new Padding(10, 0, 10, 0);
             btnUsage.Size = new Size(200, 50);
             btnUsage.TabIndex = 9;
-            btnUsage.Text = "使用狀況";
+            btnUsage.Text = "操作紀錄";
             btnUsage.TextAlign = ContentAlignment.MiddleRight;
             btnUsage.UseVisualStyleBackColor = false;
             // 
@@ -217,7 +216,7 @@
             btnNotify.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnNotify.IconSize = 36;
             btnNotify.ImageAlign = ContentAlignment.BottomLeft;
-            btnNotify.Location = new Point(0, 100);
+            btnNotify.Location = new Point(0, 50);
             btnNotify.Margin = new Padding(0);
             btnNotify.Name = "btnNotify";
             btnNotify.Padding = new Padding(10, 0, 10, 0);

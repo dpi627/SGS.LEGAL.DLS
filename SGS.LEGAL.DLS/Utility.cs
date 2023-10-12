@@ -1,6 +1,7 @@
 ﻿using Aspose.Pdf;
 using Microsoft.VisualBasic.ApplicationServices;
 using SGS.LEGAL.DLS.Entity;
+using SGS.LEGAL.DLS.Parameter;
 using SGS.LEGAL.DLS.Service;
 using System;
 using System.Collections.Generic;
@@ -286,6 +287,21 @@ namespace SGS.LEGAL.DLS
             return true;
         }
 
+        public static void AddLog(OptLogType logType, SYS_USER user, string msg = "", string memo = "")
+        {
+            var model = new Service.Info.OptLogInfo()
+            {
+                ACT_ID = (int)logType,
+                CRT_USER = user.EMP_ID
+            };
 
+            if (!string.IsNullOrEmpty(msg))
+                model.MSG = msg;
+            if (!string.IsNullOrEmpty(memo))
+                model.MEMO = memo;
+
+            using OptLogService svc = new(user);
+            svc.Add(model);
+        }
     }
 }
