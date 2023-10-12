@@ -17,6 +17,7 @@ namespace SGS.LEGAL.DLS
             InitializeComponent();
             this._config = config;
             Log.Information($"{_config.CurrentUser?.EMP_ID} Login");
+            Utility.AddLog(OptLogType.Login, _config.CurrentUser!, this.GetType().Name);
         }
 
         private void frmMain_Load(object sender, EventArgs e)

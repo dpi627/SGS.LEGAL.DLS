@@ -1,4 +1,6 @@
-﻿using PdfiumViewer;
+﻿using Aspose.Pdf.Forms;
+using PdfiumViewer;
+using SGS.LEGAL.DLS.Entity;
 using SGS.LEGAL.DLS.Model;
 using System.Data;
 using System.Drawing.Printing;
@@ -6,7 +8,7 @@ using p = SGS.LIB.Common.PrinterHelper;
 
 namespace SGS.LEGAL.DLS
 {
-    public partial class frmPrint : Form
+    public partial class frmPrint : System.Windows.Forms.Form
     {
         public enum Mode
         {
@@ -20,6 +22,8 @@ namespace SGS.LEGAL.DLS
         List<PaperSource> PaperSources;
         readonly List<Letter> _letters;
         readonly Mode _mode;
+        private readonly FormConfig? config;
+        private SYS_USER? CurrentUser => config?.CurrentUser;
 
         public frmPrint(FormConfig config, List<Letter> letters, Mode mode = Mode.Print)
         {
@@ -27,6 +31,7 @@ namespace SGS.LEGAL.DLS
             this._letters = letters;
             this._mode = mode;
             this.labMsg.Text = "";
+            this.config = config;
             this.LocalPrinters = config.DefaultPrinters;
             this.PaperSources = config.DefaultPaperSources;
         }
@@ -52,7 +57,7 @@ namespace SGS.LEGAL.DLS
         private void SetGroupBox()
         {
             this.Controls.OfType<GroupBox>().ToList()
-                .ForEach(x => x.Enabled = 
+                .ForEach(x => x.Enabled =
                     this._letters
                         .Where(y => y.FileType.ToString() == x.Tag.ToString())
                         .Count() > 0
@@ -182,6 +187,8 @@ namespace SGS.LEGAL.DLS
                     printDocument.Print();
                 }
             }
+
+            Utility.AddLog(OptLogType.Print, CurrentUser!, this.GetType().Name, $"doc:{pdfPath} printer:{printerName} paperSource:{paperSource}");
         }
 
         /// <summary>

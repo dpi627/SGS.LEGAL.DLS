@@ -18,8 +18,11 @@ namespace SGS.LEGAL.DLS.Repository
         public IList<OptLogDataModel> Read(OptLogCondition condition)
         {
             strSql = @"
-                select * from OPT_LOG 
-                where 1=1
+                select 
+                    o.*
+                    ,p.P_TXT 
+                from OPT_LOG o 
+                    left join SYS_PARAM p on p.P_CLS='ACTION' and p.P_VAL=o.ACT_ID
                 order by LOG_ID desc
             ";
             return ExecuteQuery<OptLogDataModel>(strSql);

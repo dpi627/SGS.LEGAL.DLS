@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SGS.LEGAL.DLS.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SGS.LEGAL.DLS.Repository.Condition
 {
-    public record OptLogCondition
+    public record OptLogCondition : OPT_LOG
     {
     }
 }

@@ -60,6 +60,7 @@ namespace SGS.LEGAL.DLS
                 if (result == DialogResult.No) return;
             }
             await DataImportManualAsync(comID);
+            Utility.AddLog(OptLogType.Import, CurrentUser!, this.GetType().Name, $"CompanyID: {comID}");
             GetImportData();
         }
 
@@ -91,6 +92,7 @@ namespace SGS.LEGAL.DLS
         private void btnReload_Click(object sender, EventArgs e)
         {
             GetImportData();
+            Utility.AddLog(OptLogType.Search, CurrentUser!, this.GetType().Name);
         }
     }
 }
