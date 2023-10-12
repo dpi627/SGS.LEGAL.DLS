@@ -26,7 +26,8 @@ namespace SGS.LEGAL.DLS
         Print,
         Download,
         Import,
-        Export
+        Export,
+        View
     }
 
     /// <summary>
