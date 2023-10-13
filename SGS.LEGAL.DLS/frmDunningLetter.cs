@@ -101,6 +101,13 @@ namespace SGS.LEGAL.DLS
                 DATE_E = dtpEndDate.Value
             };
 
+            Utility.AddLog(
+                OptLogType.Search,
+                CurrentUser!,
+                this.GetType().Name,
+                model.ToString()
+            );
+
             await GetImportDataAsync(model);
         }
 
@@ -224,16 +231,20 @@ namespace SGS.LEGAL.DLS
             }
             letters.Add(letter);
 
+            Utility.AddLog(OptLogType.Create, CurrentUser!, this.GetType().Name, letter.ToString());
+
             #region 催款函同時要產出信封與收件回執
             if (letterType == LetterType.DUN)
             {
                 Letter rcv = new(letterType, "RCV.docx", cst.CST_NM, FileType.R) { BD_ID_1ST = bdID1st };
                 await CreateSingleAsync(rcv, com, cst, comm, CurrentUser);
                 letters.Add(rcv);
+                Utility.AddLog(OptLogType.Create, CurrentUser!, this.GetType().Name, rcv.ToString());
 
                 Letter env = new(letterType, "ENV.docx", cst.CST_NM, FileType.E) { BD_ID_1ST = bdID1st };
                 await CreateSingleAsync(env, com, cst, comm, CurrentUser);
                 letters.Add(env);
+                Utility.AddLog(OptLogType.Create, CurrentUser!, this.GetType().Name, env.ToString());
             }
             #endregion
 
@@ -254,6 +265,7 @@ namespace SGS.LEGAL.DLS
                 using FileService svc = new FileService(CurrentUser);
                 downloadPath = svc.CopyFileToDownload(letter.TempFullPath);
                 additionalMessage = $"{Environment.NewLine}{Environment.NewLine}檔案已經下載，將為您自動開啟路徑：{Environment.NewLine}{downloadPath}";
+                Utility.AddLog(OptLogType.Download, CurrentUser!, this.GetType().Name, letter.ToString());
             }
 
             // 進行檔案處理
@@ -386,15 +398,18 @@ namespace SGS.LEGAL.DLS
 
             // 建立收件回執結構
             ReceiptModel? dataRcv = new ReceiptModel(
+                contact.RCV_POST_CODE,
                 contact.RCV_ADDR,
                 contact.RCV_NM,
-                contact.COM_ADDR,
+                contact.COM_POST_CODE,  //收件回執之收件地址一律用總公司地址資料
+                contact.COM_ADDR,       //收件回執之收件地址一律用總公司地址資料
                 contact.SND_NM,
                 info.USR_NM,
                 info.EXT
                 );
             // 建立信封結構
             EnvelopeModel? dataEnv = new EnvelopeModel(
+                contact.RCV_POST_CODE,
                 contact.RCV_ADDR,
                 contact.RCV_NM,
                 info.USR_NM,

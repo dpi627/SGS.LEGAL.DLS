@@ -66,10 +66,9 @@ namespace SGS.LEGAL.DLS.Repository
 
         protected IList<T> ExecuteQuery<T>(string sql, object? param = null)
         {
-            using (var conn = new SqlConnection(strConn))
-            {
-                return ToIList(conn.Query<T>(sql, param, commandTimeout: 600));
-            }
+            using SqlConnection? conn = new(strConn);
+                return conn.Query<T>(sql, param, commandTimeout: 600).ToList<T>();
+                //return ToIList(conn.Query<T>(sql, param, commandTimeout: 600));
         }
 
         protected bool ExecuteCommand(string sql, object? param = null)
@@ -146,20 +145,23 @@ namespace SGS.LEGAL.DLS.Repository
                     {
                         if (p != null)
                         {
-                            string[] lstIgnore = new string[] { @"SDO.MODELS.LM05.QUO_M+EDITVIEW", @"SDO.MODELS.LM05.QUO_S+EDITVIEW", @"SDO.MODELS.LM05.QUO_SL+EDITVIEW", @"SDO.MODELS.LM05.QUO_SLA+EDITVIEW", @"SDO.MODELS.LM05.QUO_S_INFO+EDITVIEW", @"SDO.MODELS.LM05.QUO_MO+EDITVIEW", @"SDO.MODELS.LM05.QUO_PAY_REC+EDITVIEW" };
+                            //string[] lstIgnore = new string[] { @"SDO.MODELS.LM05.QUO_M+EDITVIEW", @"SDO.MODELS.LM05.QUO_S+EDITVIEW", @"SDO.MODELS.LM05.QUO_SL+EDITVIEW", @"SDO.MODELS.LM05.QUO_SLA+EDITVIEW", @"SDO.MODELS.LM05.QUO_S_INFO+EDITVIEW", @"SDO.MODELS.LM05.QUO_MO+EDITVIEW", @"SDO.MODELS.LM05.QUO_PAY_REC+EDITVIEW" };
                             foreach (var prop in p.GetType().GetProperties())
                             {
                                 if (prop.PropertyType == typeof(string) && prop.GetValue(p) != null)
                                 {
                                     //prop.SetValue(p, HttpUtility.HtmlEncode(prop.GetValue(p).ToString().Trim()));
-                                    prop.SetValue(p, prop.GetValue(p).ToString().Trim());
+                                    if (prop.GetSetMethod() != null) // 有 setter 才能設值
+                                        prop.SetValue(p, prop.GetValue(p).ToString().Trim());
                                 }
                                 else if (prop.PropertyType == typeof(string) && prop.GetValue(p) == null)
                                 {
-                                    if (!lstIgnore.Contains(typeof(T).FullName.ToUpper()))
-                                    {
+                                    if (prop.GetSetMethod() != null) // 有 setter 才能設值
                                         prop.SetValue(p, string.Empty);
-                                    }
+                                    //if (!lstIgnore.Contains(typeof(T).FullName.ToUpper()))
+                                    //{
+                                    //    prop.SetValue(p, string.Empty);
+                                    //}
                                 }
                             }
                         }

@@ -1,6 +1,7 @@
 ﻿using Aspose.Pdf;
 using Microsoft.VisualBasic.ApplicationServices;
 using SGS.LEGAL.DLS.Entity;
+using SGS.LEGAL.DLS.Parameter;
 using SGS.LEGAL.DLS.Service;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Printing;
 using System.Reflection;
 using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
@@ -217,7 +219,8 @@ namespace SGS.LEGAL.DLS
             ccb.ValueMember = "P_VAL";
         }
 
-        public static void WaitUntilJobsDone(string printerName) {
+        public static void WaitUntilJobsDone(string printerName)
+        {
             PrintQueue printQueue = new(new PrintServer(), printerName);
             bool allCompleted = false;
 
@@ -248,6 +251,57 @@ namespace SGS.LEGAL.DLS
         {
             MessageBox.Show(msg, title, MessageBoxButtons.OK, icon);
             return vaildResult; //通常都是失敗才顯示警告，預設回傳 false
+        }
+
+        /// <summary>
+        /// 嚴正文字輸入，並回傳結果
+        /// 未填寫顯示警告
+        /// </summary>
+        /// <param name="txt">TextBox</param>
+        /// <param name="rePattern">Regular Expression 字串</param>
+        /// <param name="title">訊息抬頭</param>
+        /// <param name="icon">訊息圖示</param>
+        /// <returns>驗證結果，通過 true，失敗 false</returns>
+        public static bool IsVaild(ref TextBox txt, string rePattern = "", string title = "系統訊息", MessageBoxIcon icon = MessageBoxIcon.Warning)
+        {
+            // 有填寫，且未指定正規表示式，直接通過
+            if (!string.IsNullOrEmpty(txt.Text.Trim()) && string.IsNullOrEmpty(rePattern))
+                return true;
+
+            // 未填寫，顯示警告
+            if (string.IsNullOrEmpty(txt.Text.Trim()))
+            {
+                MessageBox.Show($"請填寫 {txt.PlaceholderText}", title, MessageBoxButtons.OK, icon);
+                txt.Focus();
+                return false;
+            }
+            
+            // 有填寫，且指定正規表示式，但不符合，顯示警告
+            if (!string.IsNullOrEmpty(rePattern) && !Regex.IsMatch(txt.Text.Trim(), rePattern))
+            {
+                MessageBox.Show($"{txt.PlaceholderText} 格式錯誤", title, MessageBoxButtons.OK, icon);
+                txt.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        public static void AddLog(OptLogType logType, SYS_USER user, string msg = "", string memo = "")
+        {
+            var model = new Service.Info.OptLogInfo()
+            {
+                ACT_ID = (int)logType,
+                CRT_USER = user.EMP_ID
+            };
+
+            if (!string.IsNullOrEmpty(msg))
+                model.MSG = msg;
+            if (!string.IsNullOrEmpty(memo))
+                model.MEMO = memo;
+
+            using OptLogService svc = new(user);
+            svc.Add(model);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace SGS.LEGAL.DLS.Entity
         public string BRANCH_CODE { get; set; }
         public string? COM_NM { get; set; }
         public string? COM_NM_E { get; set; }
+        public string? COM_POST_CODE { get; set; }
         public string? COM_ADDR { get; set; }
         public string? COM_ADDR_E1 { get; set; }
         public string? COM_ADDR_E2 { get; set; }
@@ -33,8 +34,17 @@ namespace SGS.LEGAL.DLS.Entity
         public string? BANK_ACT { get; set; }
         public string? CHK_TIL { get; set; }
         public string? CHK_ADDR { get; set; }
-
+        public string BUS_POST_CODE { get; set; }
         public string BUS_REG_ADDR { get; set; }
         public string CEO { get; set; }
+
+        /// <summary>
+        /// 郵遞區號前三碼
+        /// </summary>
+        public string? COM_POST_CODE_1 => COM_POST_CODE?[..3];
+        /// <summary>
+        /// 郵遞區號第四碼到最後
+        /// </summary>
+        public string? COM_POST_CODE_2 => COM_POST_CODE?[3..];
     }
 }

@@ -18,6 +18,18 @@ namespace SGS.LEGAL.DLS
         None = 0
     }
 
+    public enum OptLogType
+    {
+        Login,
+        Search,
+        Create,
+        Print,
+        Download,
+        Import,
+        Export,
+        View
+    }
+
     /// <summary>
     ///  每日轉檔狀態
     /// </summary>
