@@ -108,7 +108,7 @@
             btnDataImport.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnDataImport.IconSize = 36;
             btnDataImport.ImageAlign = ContentAlignment.BottomLeft;
-            btnDataImport.Location = new Point(0, 200);
+            btnDataImport.Location = new Point(0, 50);
             btnDataImport.Margin = new Padding(0);
             btnDataImport.Name = "btnDataImport";
             btnDataImport.Padding = new Padding(10, 0, 10, 0);
@@ -122,6 +122,7 @@
             // panLogo
             // 
             panLogo.BackColor = Color.White;
+            panLogo.BackgroundImage = Properties.Resources.title;
             panLogo.Location = new Point(0, 0);
             panLogo.Name = "panLogo";
             panLogo.Size = new Size(200, 50);
@@ -141,7 +142,7 @@
             btnHistory.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnHistory.IconSize = 36;
             btnHistory.ImageAlign = ContentAlignment.BottomLeft;
-            btnHistory.Location = new Point(0, 100);
+            btnHistory.Location = new Point(0, 150);
             btnHistory.Margin = new Padding(0);
             btnHistory.Name = "btnHistory";
             btnHistory.Padding = new Padding(10, 0, 10, 0);
@@ -166,7 +167,7 @@
             btnUsage.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnUsage.IconSize = 36;
             btnUsage.ImageAlign = ContentAlignment.BottomLeft;
-            btnUsage.Location = new Point(0, 150);
+            btnUsage.Location = new Point(0, 200);
             btnUsage.Margin = new Padding(0);
             btnUsage.Name = "btnUsage";
             btnUsage.Padding = new Padding(10, 0, 10, 0);
@@ -216,7 +217,7 @@
             btnNotify.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnNotify.IconSize = 36;
             btnNotify.ImageAlign = ContentAlignment.BottomLeft;
-            btnNotify.Location = new Point(0, 50);
+            btnNotify.Location = new Point(0, 100);
             btnNotify.Margin = new Padding(0);
             btnNotify.Name = "btnNotify";
             btnNotify.Padding = new Padding(10, 0, 10, 0);
