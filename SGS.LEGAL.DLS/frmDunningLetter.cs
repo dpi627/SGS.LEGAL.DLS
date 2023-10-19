@@ -57,7 +57,7 @@ namespace SGS.LEGAL.DLS
 
             // ROLE_ID = A (Administator) 才顯示異常資料功能
             btnAbnormal.Visible = CurrentUser?.ROLE_ID == "A";
-            chkOnlyTWD.Visible = CurrentUser?.ROLE_ID == "A";
+            chkOnlyTWD.Visible = btnAbnormal.Visible;
 
 #if DEBUG
             dtpStartDate.Value = DateTime.Today.AddYears(-2);
