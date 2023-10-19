@@ -54,6 +54,11 @@ namespace SGS.LEGAL.DLS
         private void frmDunningLetter_Load(object sender, EventArgs e)
         {
             Utility.SetComboBox(ref cbbCompany, "COMPANY");
+
+            // ROLE_ID = A (Administator) 才顯示異常資料功能
+            btnAbnormal.Visible = CurrentUser?.ROLE_ID == "A";
+            chkOnlyTWD.Visible = CurrentUser?.ROLE_ID == "A";
+
 #if DEBUG
             dtpStartDate.Value = DateTime.Today.AddYears(-2);
             txtKeyword.Text = "710360";
