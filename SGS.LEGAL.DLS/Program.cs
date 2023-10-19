@@ -65,7 +65,8 @@ namespace SGS.LEGAL.DLS
             Log.Debug("App Start");
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmMain(config));
+            Application.Run(new frmSplash(config));
+            //Application.Run(new frmMain(config));
 
             Log.Debug("App End");
 

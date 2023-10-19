@@ -1,4 +1,5 @@
 ﻿using SGS.LEGAL.DLS.Entity;
+using SGS.LEGAL.DLS.Repository.DataModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace SGS.LEGAL.DLS.Repository
         {
         }
 
-        public IList<DATA_IMPORT> Read(DATA_IMPORT model)
+        public IList<DataImportDataModel> Read(DATA_IMPORT model)
         {
             //where條件組成
             arrParam = new ArrayList
@@ -28,18 +29,21 @@ namespace SGS.LEGAL.DLS.Repository
             //sql語法組成
             strSql = string.Format(@"
                 select top 50
-                    d.*
+                    u.EMP_ID
+                    ,u.USER_NM
                     ,p.P_TXT as DI_STA_NM
+                    ,d.*
                     ,(count(0) over ()) as TOTAL
                 from DATA_IMPORT d
                     left join SYS_PARAM p on p.P_CLS='DI_STA' and p.P_VAL=d.DI_STA
+                    left join SYS_USER u on u.EMP_ID=d.CRT_USER
                 where 1=1 {0}
                 order by DI_ID desc
                 -- offset @SKIP rows fetch next @TAKE rows only
             ", ParamStr);
 
             //執行並回傳
-            return ExecuteQuery<DATA_IMPORT>(strSql, model);
+            return ExecuteQuery<DataImportDataModel>(strSql, model);
         }
 
         public int Create(DATA_IMPORT model)

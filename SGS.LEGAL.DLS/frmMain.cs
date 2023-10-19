@@ -30,7 +30,7 @@ namespace SGS.LEGAL.DLS
 #endif
 #if DEBUG
             //btnNotify_Click(sender, e);
-            btnHistory_Click(sender, e);
+            //btnHistory_Click(sender, e);
 #endif
             #endregion
 
@@ -120,6 +120,11 @@ namespace SGS.LEGAL.DLS
         private void btnHistory_Click(object sender, EventArgs e)
         {
             LoadForm<frmDocLog>("歷程紀錄");
+        }
+
+        private void linkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmSplash(null, false).Show();
         }
     }
 }

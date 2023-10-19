@@ -45,6 +45,7 @@
             labUser = new ToolStripStatusLabel();
             progressBar1 = new CustomProgressBar();
             panContent = new Panel();
+            linkHelp = new LinkLabel();
             panMenu.SuspendLayout();
             panTitle.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -232,6 +233,7 @@
             // 
             panTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panTitle.BackColor = Color.White;
+            panTitle.Controls.Add(linkHelp);
             panTitle.Controls.Add(labTitle);
             panTitle.Location = new Point(200, 3);
             panTitle.Margin = new Padding(0);
@@ -297,11 +299,28 @@
             // panContent
             // 
             panContent.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panContent.BackgroundImageLayout = ImageLayout.Zoom;
             panContent.Location = new Point(200, 53);
             panContent.Margin = new Padding(0);
             panContent.Name = "panContent";
             panContent.Size = new Size(919, 486);
             panContent.TabIndex = 4;
+            // 
+            // linkHelp
+            // 
+            linkHelp.ActiveLinkColor = Color.DimGray;
+            linkHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            linkHelp.AutoSize = true;
+            linkHelp.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            linkHelp.LinkColor = Color.Tomato;
+            linkHelp.Location = new Point(873, 21);
+            linkHelp.Name = "linkHelp";
+            linkHelp.Size = new Size(34, 15);
+            linkHelp.TabIndex = 2;
+            linkHelp.TabStop = true;
+            linkHelp.Text = "Help";
+            linkHelp.VisitedLinkColor = Color.Tomato;
+            linkHelp.LinkClicked += linkHelp_LinkClicked;
             // 
             // frmMain
             // 
@@ -349,5 +368,6 @@
         private ToolStripStatusLabel labSapce;
         private ToolStripStatusLabel labUser;
         private FontAwesome.Sharp.IconButton btnDemo;
+        private LinkLabel linkHelp;
     }
 }
