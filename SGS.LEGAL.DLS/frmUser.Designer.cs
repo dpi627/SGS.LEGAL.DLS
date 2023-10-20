@@ -50,7 +50,7 @@
             grpCurrentUser.Controls.Add(labName);
             grpCurrentUser.Location = new Point(12, 12);
             grpCurrentUser.Name = "grpCurrentUser";
-            grpCurrentUser.Size = new Size(462, 172);
+            grpCurrentUser.Size = new Size(1119, 172);
             grpCurrentUser.TabIndex = 2;
             grpCurrentUser.TabStop = false;
             grpCurrentUser.Text = "Current User";
@@ -99,9 +99,10 @@
             grpSwitchUser.Controls.Add(txtName);
             grpSwitchUser.Controls.Add(label2);
             grpSwitchUser.Controls.Add(label3);
+            grpSwitchUser.Enabled = false;
             grpSwitchUser.Location = new Point(12, 190);
             grpSwitchUser.Name = "grpSwitchUser";
-            grpSwitchUser.Size = new Size(462, 201);
+            grpSwitchUser.Size = new Size(1119, 201);
             grpSwitchUser.TabIndex = 4;
             grpSwitchUser.TabStop = false;
             grpSwitchUser.Text = "Switch User";
