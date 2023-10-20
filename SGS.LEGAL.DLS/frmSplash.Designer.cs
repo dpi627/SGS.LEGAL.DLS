@@ -41,6 +41,7 @@
             linkLabel1 = new LinkLabel();
             label5 = new Label();
             btnClose = new Button();
+            labMsg = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -127,7 +128,6 @@
             // timer1
             // 
             timer1.Interval = 350;
-            timer1.Tick += timer1_Tick;
             // 
             // panel2
             // 
@@ -201,6 +201,17 @@
             btnClose.Visible = false;
             btnClose.Click += button1_Click;
             // 
+            // labMsg
+            // 
+            labMsg.AutoSize = true;
+            labMsg.BackColor = Color.Transparent;
+            labMsg.ForeColor = SystemColors.ControlDarkDark;
+            labMsg.Location = new Point(12, 336);
+            labMsg.Name = "labMsg";
+            labMsg.Size = new Size(40, 15);
+            labMsg.TabIndex = 9;
+            labMsg.Text = "msg...";
+            // 
             // frmSplash
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -208,6 +219,7 @@
             BackgroundImage = Properties.Resources.splash;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(640, 360);
+            Controls.Add(labMsg);
             Controls.Add(btnClose);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -245,5 +257,6 @@
         private LinkLabel linkLabel1;
         private Label label5;
         private Button btnClose;
+        private Label labMsg;
     }
 }

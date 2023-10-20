@@ -1,49 +1,89 @@
 ﻿using SGS.LEGAL.DLS.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SGS.LEGAL.DLS
 {
     public partial class frmSplash : Form
     {
-        private FormConfig _config;
         Random _r = new();
-        bool _IsCount = false;
-        frmMain _frmMain;
-        int i = 0;
+        bool _isInit = false; // 是否為程式初始化
+        int delay = 400; // delay time between each task
 
-        public frmSplash(FormConfig config, bool isCount = true)
+        public frmSplash(bool isInit = true)
         {
             InitializeComponent();
-            this._config = config;
-            _IsCount = isCount;
+            _isInit = isInit;
+            labMsg.Text = "";
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void frmSplash_Load(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
-            //circularProgressBar1.Increment(_r.Next(3,5)); //隨機增加變量
-            circularProgressBar1.Step = _r.Next(7, 11);
-            i += circularProgressBar1.Step;
-            circularProgressBar1.Value = i < circularProgressBar1.Maximum ? i : circularProgressBar1.Maximum;
-            circularProgressBar1.Text = circularProgressBar1.Value.ToString();
+            // set splash-form size equals to background image size
+            Width = BackgroundImage.Width;
+            Height = BackgroundImage.Height;
+            // init circular progress bar
+            InitProgressBar();
+        }
 
-
-            if (circularProgressBar1.Value == circularProgressBar1.Maximum)
+        private async void frmSplash_Shown(object sender, EventArgs e)
+        {
+            if (_isInit)
             {
-                timer1.Enabled = false;
-                this.Hide();
-                _frmMain.Show();
-                _frmMain.FormClosed += (sender, e) => this.Close();
+                UseWaitCursor = true;
+                // 設定 timer 並啟用，開始更新進度
+                timer1.Interval = 100; // timer 觸發間隔，單位 ms
+                timer1.Tick += (sender, e) => TimerTick(sender, e);
+                timer1.Enabled = true;
+
+                try
+                {
+                    // 設定表單設定檔
+                    FormConfig config = await SetFormConfigAsync();
+                    // 停止 timer (更新進度)
+                    timer1.Enabled = false;
+                    // 直接設定為完成
+                    AddProgress(100);
+                    // 暫停讓 UI 得以更新 (不然會顯示 90 幾就跳掉)
+                    await Task.Delay(1000);
+                    // 顯示主畫面
+                    ShowMainForm(config);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "系統異常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+                finally
+                {
+                    timer1.Enabled = false;
+                    UseWaitCursor = false;
+                }
             }
+            else
+                btnClose.Visible = !_isInit;
+
+            panel1.Visible = panel2.Visible = !_isInit;
+        }
+
+        private void TimerTick(object sender, EventArgs e)
+        {
+            AddProgress();
+        }
+
+        /// <summary>
+        /// 顯示主畫面
+        /// </summary>
+        /// <param name="config">系統設定</param>
+        private void ShowMainForm(FormConfig config)
+        {
+            // 隱藏歡迎畫面
+            this.Hide();
+            // 建立主畫面
+            frmMain main = new frmMain(config);
+            // 設定主畫面關閉時，關閉歡迎畫面 (避免殘留資料)
+            main.FormClosed += (sender, e) => this.Close();
+            // 顯示主畫面
+            main.Show();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -58,35 +98,77 @@ namespace SGS.LEGAL.DLS
             this.Close();
         }
 
-        private void frmSplash_Shown(object sender, EventArgs e)
+        /// <summary>
+        /// 設定表單設定檔，同事更新訊息與進度
+        /// </summary>
+        /// <returns>系統表單設定檔</returns>
+        private async Task<FormConfig> SetFormConfigAsync()
         {
-            if (_IsCount)
+            try
             {
-                timer1_Tick(sender, e);
-                this.UseWaitCursor = true;
-            }
-            else
-                //DoubleClick += (sender, e) => this.Close();
+                FormConfig config = await Task.Run(() =>
+                {
+                    ShowMsg("建立設定檔");
+                    return new FormConfig();
+                });
+                await Task.Delay(delay);
+                await Task.Run(() => { ShowMsg("設定目前使用者", 30); config.SetCurrentUser(); });
+                await Task.Delay(delay);
+                await Task.Run(() => { ShowMsg("設定特殊IO帳號", 50); config.SetCurrentUser(); });
+                await Task.Delay(delay);
+                await Task.Run(() => { ShowMsg("設定通用資料", 70); config.SetCurrentUser(); });
+                await Task.Delay(delay);
+                await Task.Run(() => { ShowMsg("設定印表機", 90); config.SetCurrentUser(); });
+                await Task.Delay(delay);
 
-                btnClose.Visible = !_IsCount;
-            panel1.Visible = panel2.Visible = !_IsCount;
+                return config;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        private void frmSplash_Load(object sender, EventArgs e)
+        /// <summary>
+        /// 顯示執行訊息同時更新進度
+        /// </summary>
+        /// <param name="msg">訊息內容</param>
+        /// <param name="progressValue">進度</param>
+        private void ShowMsg(string msg, int? progressValue = null)
         {
-            // set splash-form size equals to background image size
-            Width = BackgroundImage.Width;
-            Height = BackgroundImage.Height;
+            this.Invoke((Action)(() =>
+            {
+                labMsg.Text = $"{msg}...";
+                if (progressValue.HasValue)
+                    AddProgress(progressValue.Value);
+            }));
+        }
 
-            circularProgressBar1.Value = 0;
-            circularProgressBar1.Step = 1;
-            circularProgressBar1.StartAngle = 270;
-            circularProgressBar1.ForeColor = Color.White; //.FromArgb(210, 255, 255, 255);
-            circularProgressBar1.ProgressColor = Color.Tomato; //.FromArgb(210, 214, 118, 25);
+        /// <summary>
+        /// 進度條初始化
+        /// </summary>
+        private void InitProgressBar()
+        {
+            circularProgressBar1.Step = 1; // 每次加多少
+            circularProgressBar1.Value = 0; // 起始值
+            circularProgressBar1.StartAngle = 270; // 起始角度
+            circularProgressBar1.ForeColor = Color.White;
+            circularProgressBar1.ProgressColor = Color.Tomato;
+        }
 
-            // load main-form
-            if (_IsCount)
-                _frmMain = new frmMain(_config);
+        /// <summary>
+        /// 更新進度條
+        /// </summary>
+        /// <param name="value">進度值</param>
+        private void AddProgress(int value = 0)
+        {
+            int currentValue = circularProgressBar1.Value;
+            // 如果有給值就用，沒有就用隨機加上一個數值，感覺有在動
+            int nextValue = value > 0 ? value : currentValue + _r.Next(1, 3);
+            // 更新進度，不能超過本身上限
+            circularProgressBar1.Value = nextValue > circularProgressBar1.Maximum ? circularProgressBar1.Maximum : nextValue;
+            // 更新中心顯示文字
+            circularProgressBar1.Text = circularProgressBar1.Value.ToString();
         }
     }
 }

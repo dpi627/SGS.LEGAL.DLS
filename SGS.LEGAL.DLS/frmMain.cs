@@ -124,7 +124,7 @@ namespace SGS.LEGAL.DLS
 
         private void linkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new frmSplash(null, false).Show();
+            new frmSplash(false).Show();
         }
     }
 }
