@@ -114,11 +114,11 @@ namespace SGS.LEGAL.DLS
                 await Task.Delay(delay);
                 await Task.Run(() => { ShowMsg("設定目前使用者", 30); config.SetCurrentUser(); });
                 await Task.Delay(delay);
-                await Task.Run(() => { ShowMsg("設定特殊IO帳號", 50); config.SetCurrentUser(); });
+                await Task.Run(() => { ShowMsg("設定特殊IO帳號", 50); config.SetImpersonator(); });
                 await Task.Delay(delay);
-                await Task.Run(() => { ShowMsg("設定通用資料", 70); config.SetCurrentUser(); });
+                await Task.Run(() => { ShowMsg("設定通用資料", 70); config.SetCommonData(); });
                 await Task.Delay(delay);
-                await Task.Run(() => { ShowMsg("設定印表機", 90); config.SetCurrentUser(); });
+                await Task.Run(() => { ShowMsg("設定印表機", 90); config.SetPrinter(); });
                 await Task.Delay(delay);
 
                 return config;
