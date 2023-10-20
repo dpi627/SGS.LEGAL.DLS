@@ -1,5 +1,4 @@
 using Serilog;
-using SGS.LEGAL.DLS.Model;
 using SGS.LEGAL.DLS.Service;
 using SGS.LIB.Common;
 using System.Diagnostics;
@@ -32,7 +31,7 @@ namespace SGS.LEGAL.DLS
                 Debugger.Break();
             });
 #endif
-#endregion
+            #endregion
 
 #if RELEASE
             #region 系統允許執行時間判斷
@@ -54,18 +53,11 @@ namespace SGS.LEGAL.DLS
             }
             #endregion
 #endif
-            #region 建立表單設定
-            FormConfig config = new FormConfig()
-                .SetCurrentUser()   // 設定目前使用者
-                .SetImpersonator()  // 設定特殊AD帳號
-                .SetCommonData()    // 設定通用資料
-                .SetPrinter();      // 設定印表機
-            #endregion
 
             Log.Debug("App Start");
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmMain(config));
+            Application.Run(new frmSplash());
 
             Log.Debug("App End");
 

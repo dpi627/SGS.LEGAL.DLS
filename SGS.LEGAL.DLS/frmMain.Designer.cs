@@ -45,6 +45,7 @@
             labUser = new ToolStripStatusLabel();
             progressBar1 = new CustomProgressBar();
             panContent = new Panel();
+            linkHelp = new LinkLabel();
             panMenu.SuspendLayout();
             panTitle.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -108,7 +109,7 @@
             btnDataImport.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnDataImport.IconSize = 36;
             btnDataImport.ImageAlign = ContentAlignment.BottomLeft;
-            btnDataImport.Location = new Point(0, 200);
+            btnDataImport.Location = new Point(0, 50);
             btnDataImport.Margin = new Padding(0);
             btnDataImport.Name = "btnDataImport";
             btnDataImport.Padding = new Padding(10, 0, 10, 0);
@@ -122,6 +123,7 @@
             // panLogo
             // 
             panLogo.BackColor = Color.White;
+            panLogo.BackgroundImage = Properties.Resources.title;
             panLogo.Location = new Point(0, 0);
             panLogo.Name = "panLogo";
             panLogo.Size = new Size(200, 50);
@@ -141,7 +143,7 @@
             btnHistory.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnHistory.IconSize = 36;
             btnHistory.ImageAlign = ContentAlignment.BottomLeft;
-            btnHistory.Location = new Point(0, 100);
+            btnHistory.Location = new Point(0, 150);
             btnHistory.Margin = new Padding(0);
             btnHistory.Name = "btnHistory";
             btnHistory.Padding = new Padding(10, 0, 10, 0);
@@ -166,7 +168,7 @@
             btnUsage.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnUsage.IconSize = 36;
             btnUsage.ImageAlign = ContentAlignment.BottomLeft;
-            btnUsage.Location = new Point(0, 150);
+            btnUsage.Location = new Point(0, 200);
             btnUsage.Margin = new Padding(0);
             btnUsage.Name = "btnUsage";
             btnUsage.Padding = new Padding(10, 0, 10, 0);
@@ -216,7 +218,7 @@
             btnNotify.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnNotify.IconSize = 36;
             btnNotify.ImageAlign = ContentAlignment.BottomLeft;
-            btnNotify.Location = new Point(0, 50);
+            btnNotify.Location = new Point(0, 100);
             btnNotify.Margin = new Padding(0);
             btnNotify.Name = "btnNotify";
             btnNotify.Padding = new Padding(10, 0, 10, 0);
@@ -231,6 +233,7 @@
             // 
             panTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panTitle.BackColor = Color.White;
+            panTitle.Controls.Add(linkHelp);
             panTitle.Controls.Add(labTitle);
             panTitle.Location = new Point(200, 3);
             panTitle.Margin = new Padding(0);
@@ -296,11 +299,28 @@
             // panContent
             // 
             panContent.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panContent.BackgroundImageLayout = ImageLayout.Zoom;
             panContent.Location = new Point(200, 53);
             panContent.Margin = new Padding(0);
             panContent.Name = "panContent";
             panContent.Size = new Size(919, 486);
             panContent.TabIndex = 4;
+            // 
+            // linkHelp
+            // 
+            linkHelp.ActiveLinkColor = Color.DimGray;
+            linkHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            linkHelp.AutoSize = true;
+            linkHelp.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            linkHelp.LinkColor = Color.Tomato;
+            linkHelp.Location = new Point(873, 21);
+            linkHelp.Name = "linkHelp";
+            linkHelp.Size = new Size(34, 15);
+            linkHelp.TabIndex = 2;
+            linkHelp.TabStop = true;
+            linkHelp.Text = "Help";
+            linkHelp.VisitedLinkColor = Color.Tomato;
+            linkHelp.LinkClicked += linkHelp_LinkClicked;
             // 
             // frmMain
             // 
@@ -348,5 +368,6 @@
         private ToolStripStatusLabel labSapce;
         private ToolStripStatusLabel labUser;
         private FontAwesome.Sharp.IconButton btnDemo;
+        private LinkLabel linkHelp;
     }
 }

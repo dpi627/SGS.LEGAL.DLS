@@ -33,6 +33,11 @@ namespace SGS.LEGAL.DLS
         private void frmDataImport_Load(object sender, EventArgs e)
         {
             Utility.SetComboBox(ref cbbCompany, "COMPANY", true, "所有公司");
+
+            // 只有管理者或系統管理者才顯示
+            cbbCompany.Visible = CurrentUser.ROLE_ID == "A" || CurrentUser.ROLE_ID == "S";
+            btnDataImport.Visible = cbbCompany.Visible;
+
             GetImportData();
         }
 

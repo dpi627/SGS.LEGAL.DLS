@@ -4,6 +4,7 @@ using SGS.LEGAL.DLS.Entity;
 using SGS.LEGAL.DLS.Repository;
 using System.Data;
 using System.Diagnostics;
+using SGS.LEGAL.DLS.Repository.DataModel;
 
 namespace SGS.LEGAL.DLS.Service
 {
@@ -21,7 +22,7 @@ namespace SGS.LEGAL.DLS.Service
         public DataTable? Get()
         {
             using DataImportRepo repo = new(user);
-            IList<DATA_IMPORT>? data = repo.Read(model);
+            IList<DataImportDataModel>? data = repo.Read(model);
             //IList<vm> vm = data.Select(x => new vm(x)).ToList();
             return Utility.ToDataTable(data);
         }
@@ -107,7 +108,7 @@ namespace SGS.LEGAL.DLS.Service
         public int CreateDataImport(bool IsManual)
         {
             model.IS_MANUAL = IsManual;
-            model.CRT_USER = user.USER_ID;
+            model.CRT_USER = user.EMP_ID;
             model.PROCESS_START = DateTime.Now;
             using DataImportRepo di = new(user);
             model.DI_ID = di.Create(model);
@@ -123,7 +124,7 @@ namespace SGS.LEGAL.DLS.Service
         public void UpdateDataImportAsFinished(string DailyImportStatus = DataImportStatus.Finished, string? FinishReason = null)
         {
             model.PROCESS_END = DateTime.Now;
-            model.MDF_USER = user.USER_ID;
+            model.MDF_USER = user.EMP_ID;
             model.DI_STA = DailyImportStatus;
             model.FINISH_REASON = FinishReason;
 

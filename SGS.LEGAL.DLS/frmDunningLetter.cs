@@ -1,19 +1,15 @@
-﻿using Aspose.Pdf.LogicalStructure;
-using Aspose.Words.XAttr;
-using AutoMapper;
+﻿using AutoMapper;
 using LoadingIndicator.WinForms;
 using Serilog;
-using Serilog.Core;
 using SGS.LEGAL.DLS.Entity;
 using SGS.LEGAL.DLS.Mapping;
 using SGS.LEGAL.DLS.Model;
 using SGS.LEGAL.DLS.Parameter;
 using SGS.LEGAL.DLS.Service;
 using SGS.LEGAL.DLS.Service.Info;
+using SGS.LEGAL.DLS.Service.ResultModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing.Printing;
-using System.Printing;
 using System.Text.RegularExpressions;
 
 namespace SGS.LEGAL.DLS
@@ -58,6 +54,11 @@ namespace SGS.LEGAL.DLS
         private void frmDunningLetter_Load(object sender, EventArgs e)
         {
             Utility.SetComboBox(ref cbbCompany, "COMPANY");
+
+            // ROLE_ID = A (Administator) 才顯示異常資料功能
+            btnAbnormal.Visible = CurrentUser?.ROLE_ID == "A";
+            chkOnlyTWD.Visible = btnAbnormal.Visible;
+
 #if DEBUG
             dtpStartDate.Value = DateTime.Today.AddYears(-2);
             txtKeyword.Text = "710360";
@@ -204,11 +205,20 @@ namespace SGS.LEGAL.DLS
             COMPANY com = svcCom.Get(cbbCompany.SelectedValue.ToString()) ?? new COMPANY();
 
             // 提供客戶統編做為產出虛擬帳號使用
-            com.BANK_ACT = com.COM_CODE switch
+            //com.BANK_ACT = com.COM_CODE switch
+            //{
+            //    "SGS" or "CCS" => string.Format(com.BANK_ACT ?? "", cst.CST_NO),
+            //    _ => com.BANK_ACT
+            //};
+            BankAccountInfo info = new()
             {
-                "SGS" or "CCS" => string.Format(com.BANK_ACT ?? "", cst.CST_NO),
-                _ => com.BANK_ACT
+                COM_CODE = com.COM_CODE,
+                CST_NO = cst.CST_NO,
+                BOSS_NO = cst.BOSS_NO
             };
+            using CustomerService? svcC = new CustomerService(CurrentUser);
+            BankAccountResultModel? bank = svcC.GetBankAccountInfo(info);
+            com.BANK_ACT = bank.BANK_ACT;
 
             // 建立通知函通用結構
             var comm = new CommonInfo(dtpEndDate.Value, total);

@@ -43,6 +43,8 @@ namespace SGS.LEGAL.DLS.Model
         public FormConfig SetCurrentUser(UserPrincipal? adUser = null)
         {
             UserPrincipal? AdUser = adUser ?? Utility.GetCurrentAdUser();
+            if (AdUser == null)
+                throw new Exception("無法取得使用者資料");
             using SysUserService svc = new();
             this.CurrentUser = svc.Get(AdUser?.EmployeeId);
             return this;
