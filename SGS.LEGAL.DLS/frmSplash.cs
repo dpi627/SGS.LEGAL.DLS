@@ -5,9 +5,8 @@ namespace SGS.LEGAL.DLS
 {
     public partial class frmSplash : Form
     {
-        Random _r = new();
-        bool _isInit = false; // 是否為程式初始化
-        int delay = 400; // delay time between each task
+        bool _isInit = false; // 是否為程式初始化，是的話會執行初始化動作並顯示進度
+        int _delay = 300; // delay time between each step task
 
         public frmSplash(bool isInit = true)
         {
@@ -31,16 +30,14 @@ namespace SGS.LEGAL.DLS
             {
                 UseWaitCursor = true;
                 // 設定 timer 並啟用，開始更新進度
-                timer1.Interval = 100; // timer 觸發間隔，單位 ms
+                timer1.Interval = 300; // timer 觸發間隔，單位 ms
                 timer1.Tick += (sender, e) => TimerTick(sender, e);
                 timer1.Enabled = true;
 
                 try
                 {
-                    // 設定表單設定檔
+                    // 建立各種表單初始化設定，並回報內容與進度
                     FormConfig config = await SetFormConfigAsync();
-                    // 停止 timer (更新進度)
-                    timer1.Enabled = false;
                     // 直接設定為完成
                     AddProgress(100);
                     // 暫停讓 UI 得以更新 (不然會顯示 90 幾就跳掉)
@@ -99,7 +96,7 @@ namespace SGS.LEGAL.DLS
         }
 
         /// <summary>
-        /// 設定表單設定檔，同事更新訊息與進度
+        /// 設定表單設定檔，同時更新訊息與進度
         /// </summary>
         /// <returns>系統表單設定檔</returns>
         private async Task<FormConfig> SetFormConfigAsync()
@@ -108,18 +105,18 @@ namespace SGS.LEGAL.DLS
             {
                 FormConfig config = await Task.Run(() =>
                 {
-                    ShowMsg("建立設定檔");
+                    ShowMsg("建立設定檔", 10);
                     return new FormConfig();
                 });
-                await Task.Delay(delay);
-                await Task.Run(() => { ShowMsg("設定目前使用者", 30); config.SetCurrentUser(); });
-                await Task.Delay(delay);
-                await Task.Run(() => { ShowMsg("設定特殊IO帳號", 50); config.SetImpersonator(); });
-                await Task.Delay(delay);
-                await Task.Run(() => { ShowMsg("設定通用資料", 70); config.SetCommonData(); });
-                await Task.Delay(delay);
+                await Task.Delay(_delay);
+                await Task.Run(() => { ShowMsg("設定目前使用者", 20); config.SetCurrentUser(); });
+                await Task.Delay(_delay);
+                await Task.Run(() => { ShowMsg("設定特殊IO帳號", 70); config.SetImpersonator(); });
+                await Task.Delay(_delay);
+                await Task.Run(() => { ShowMsg("設定通用資料", 80); config.SetCommonData(); });
+                await Task.Delay(_delay);
                 await Task.Run(() => { ShowMsg("設定印表機", 90); config.SetPrinter(); });
-                await Task.Delay(delay);
+                await Task.Delay(_delay);
 
                 return config;
             }
@@ -164,7 +161,7 @@ namespace SGS.LEGAL.DLS
         {
             int currentValue = circularProgressBar1.Value;
             // 如果有給值就用，沒有就用隨機加上一個數值，感覺有在動
-            int nextValue = value > 0 ? value : currentValue + _r.Next(1, 3);
+            int nextValue = value > 0 ? value : currentValue + circularProgressBar1.Step;
             // 更新進度，不能超過本身上限
             circularProgressBar1.Value = nextValue > circularProgressBar1.Maximum ? circularProgressBar1.Maximum : nextValue;
             // 更新中心顯示文字
