@@ -134,12 +134,22 @@ namespace SGS.LEGAL.DLS.Repository
 			";
             return ExecuteCommand(strSql, model);
         }
+        public bool DeleteOldData(BOSS_DAILY model)
+        {
+            strSql = @"
+				delete from BOSS_DAILY
+				where 
+					CRT_DATE < getdate()
+					and COMPANY = @COMPANY
+			";
+            return ExecuteCommand(strSql, model);
+        }
 
-		/// <summary>
-		/// 讀取可能異常資料
-		/// </summary>
-		/// <param name="IsOnlyTWD">是否只抓台幣</param>
-		/// <returns></returns>
+        /// <summary>
+        /// 讀取可能異常資料
+        /// </summary>
+        /// <param name="IsOnlyTWD">是否只抓台幣</param>
+        /// <returns></returns>
         public IList<BOSS_DAILY> ReadAbnormal(bool IsOnlyTWD = true)
         {
             //where條件組成
