@@ -73,6 +73,11 @@ namespace SGS.LEGAL.DLS.Service
                     Row r = worksheet.Cells.Rows[i];
                     // 建立並取得 BOSS_DAILY 結構化資料
                     BOSS_DAILY data = GetBossDailyData(r);
+
+#if DEBUG
+                    if (data.CURR != "TWD") continue; // 只處理台幣
+#endif
+
                     // 寫入資料
                     repo.Create(data);
                     Logger.Information($"Add {data.COMPANY} {data.BOSS_NO} {data.INV_NO} {data.INV_AMT} {data.CURR}");
