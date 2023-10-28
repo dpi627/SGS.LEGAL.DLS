@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.IO;
 using Aspose.Cells;
 using SGS.LEGAL.DLS.Entity;
 using SGS.LEGAL.DLS.Repository;
@@ -45,12 +46,53 @@ namespace SGS.LEGAL.DLS.Service
             model.MDF_USER = user?.USER_ID;
             repo.UpdateOldDataAsExpired(model);
         }
+        public void DeleteOldData()
+        {
+            using BossDailyRepo repo = new(user);
+            repo.DeleteOldData(model);
+            Logger.Information($"Delete {model.COMPANY} data");
+        }
 
         /// <summary>
         /// 讀取指定 Excel，逐筆轉換資料並寫入
         /// </summary>
         /// <param name="file"></param>
         public void ReadExcelAndCreateData(string file)
+        {
+            Workbook? workbook = null;
+            try
+            {
+                workbook = new(file);
+                Worksheet worksheet = workbook.Worksheets[0];
+                // 資料起始
+                int startRowIndex = 1;
+                using BossDailyRepo repo = new(user);
+                for (int i = startRowIndex; i <= worksheet.Cells.MaxDataRow; i++)
+                {
+                    // 取得目前資料列
+                    Row r = worksheet.Cells.Rows[i];
+                    // 建立並取得 BOSS_DAILY 結構化資料
+                    BOSS_DAILY data = GetBossDailyData(r);
+
+#if DEBUG
+                    if (data.CURR != "TWD") continue; // 只處理台幣
+#endif
+
+                    // 寫入資料
+                    repo.Create(data);
+                    Logger.Information($"Add {data.COMPANY} {data.BOSS_NO} {data.INV_NO} {data.INV_AMT} {data.CURR}");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                workbook?.Dispose();
+            }
+        }
+        public void ReadExcelAndCreateData(Stream file)
         {
             Workbook? workbook = null;
             try

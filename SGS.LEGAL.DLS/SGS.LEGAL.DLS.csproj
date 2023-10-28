@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>money.ico</ApplicationIcon>
-    <AssemblyVersion>0.0.1.20</AssemblyVersion>
+    <AssemblyVersion>0.0.1.21</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

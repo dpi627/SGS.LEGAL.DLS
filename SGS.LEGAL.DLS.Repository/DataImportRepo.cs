@@ -63,7 +63,7 @@ namespace SGS.LEGAL.DLS.Repository
             strSql = @"
                 update DATA_IMPORT
                 set
-                    PROCESS_END = @PROCESS_END,
+                    PROCESS_END = getdate(),
                     FINISH_REASON = @FINISH_REASON,
                     DI_STA = @DI_STA,
                     MDF_USER = @MDF_USER,

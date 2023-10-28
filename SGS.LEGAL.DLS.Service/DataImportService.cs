@@ -52,6 +52,7 @@ namespace SGS.LEGAL.DLS.Service
 
             try
             {
+                List<string> finishMsg = new();
                 foreach (SYS_PARAM com in coms)
                 {
                     // 如果有指定公司，只處理該公司
@@ -76,15 +77,19 @@ namespace SGS.LEGAL.DLS.Service
 
                     using BossDailyService boss = new(user, new BOSS_DAILY() { DI_ID = model.DI_ID, COMPANY = com.P_VAL });
                     // 更新舊資料 (設定為失效)
-                    boss.UpdateOldDataAsExpired();
+                    //boss.UpdateOldDataAsExpired();
+                    boss.DeleteOldData();
                     // 讀取 Excel，建立資料
                     boss.ReadExcelAndCreateData(filePath);
 
                     stopwatch.Stop(); // 停止計時
                     TimeSpan elapsedTime = stopwatch.Elapsed; // 取得經過時間
                     string formattedTime = elapsedTime.ToString(@"hh\:mm\:ss\.fff");
-                    Logger.Information($"Finish: {com.P_VAL} ({formattedTime})");
+                    finishMsg.Add($"{com.P_VAL} cost time {formattedTime}");
                 }
+
+                finishMsg.ForEach(msg => Logger.Information(msg));
+
                 UpdateDataImportAsFinished(DataImportStatus.Finished, final_reason);
                 Logger.Information("Ended {ImportType} import", IsManual ? "Manual" : "Auto");
             }
@@ -123,7 +128,7 @@ namespace SGS.LEGAL.DLS.Service
         /// <param name="FinishReason">寫入完成或異常訊息</param>
         public void UpdateDataImportAsFinished(string DailyImportStatus = DataImportStatus.Finished, string? FinishReason = null)
         {
-            model.PROCESS_END = DateTime.Now;
+            //model.PROCESS_END = DateTime.Now;
             model.MDF_USER = user.EMP_ID;
             model.DI_STA = DailyImportStatus;
             model.FINISH_REASON = FinishReason;

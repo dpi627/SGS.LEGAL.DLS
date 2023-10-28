@@ -8,7 +8,7 @@ namespace SGS.LEGAL.DLS.Entity
         [Required]
         public int U_ID { get; init; }
         [Required]
-        public string? EMP_ID { get; set; }
+        public string? EMP_ID { get; set; } = "SYSOP";
         [Required]
         public string? AD_ID { get; set; }
         public string? USER_ID { get; set; }
