@@ -126,5 +126,10 @@ namespace SGS.LEGAL.DLS
         {
             new frmSplash(false).ShowDialog();
         }
+
+        private void btnUsage_Click(object sender, EventArgs e)
+        {
+            LoadForm<frmOptLog>("操作紀錄");
+        }
     }
 }

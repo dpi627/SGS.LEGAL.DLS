@@ -1,13 +1,10 @@
 ﻿using SGS.LEGAL.DLS.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SGS.LEGAL.DLS.Repository.Condition
 {
     public record OptLogCondition : OPT_LOG
     {
+        public DateTime? DATE_START { get; set; }
+        public DateTime? DATE_END { get; set; }
     }
 }

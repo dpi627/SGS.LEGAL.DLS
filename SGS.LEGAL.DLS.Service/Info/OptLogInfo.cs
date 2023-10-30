@@ -1,13 +1,8 @@
-﻿using SGS.LEGAL.DLS.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SGS.LEGAL.DLS.Repository.Condition;
 
 namespace SGS.LEGAL.DLS.Service.Info
 {
-    public record OptLogInfo : OPT_LOG
+    public record OptLogInfo : OptLogCondition
     {
     }
 }
