@@ -76,9 +76,8 @@ namespace SGS.LEGAL.DLS.Service
                     #endregion
 
                     using BossDailyService boss = new(user, new BOSS_DAILY() { DI_ID = model.DI_ID, COMPANY = com.P_VAL });
-                    // 更新舊資料 (設定為失效)
-                    //boss.UpdateOldDataAsExpired();
-                    boss.DeleteOldData();
+                    boss.UpdateOldDataAsExpired();　// 更新舊資料 (設定為失效)
+                    //boss.DeleteOldData();　// 刪除舊資料 (不建議，因為可能會有其他資料參考到)
                     // 讀取 Excel，建立資料
                     boss.ReadExcelAndCreateData(filePath);
 
