@@ -33,8 +33,8 @@
             btnSearch = new FontAwesome.Sharp.IconButton();
             dgvOptLog = new DataGridView();
             Action = new DataGridViewTextBoxColumn();
-            Message = new DataGridViewTextBoxColumn();
-            EmpId = new DataGridViewTextBoxColumn();
+            FunctionName = new DataGridViewTextBoxColumn();
+            EmployeeID = new DataGridViewTextBoxColumn();
             UserName = new DataGridViewTextBoxColumn();
             LogTime = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvOptLog).BeginInit();
@@ -60,7 +60,6 @@
             // 
             // btnSearch
             // 
-            btnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSearch.BackColor = Color.Tomato;
             btnSearch.FlatAppearance.BorderSize = 0;
             btnSearch.FlatStyle = FlatStyle.Flat;
@@ -71,7 +70,7 @@
             btnSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSearch.IconSize = 20;
             btnSearch.ImageAlign = ContentAlignment.BottomLeft;
-            btnSearch.Location = new Point(840, 12);
+            btnSearch.Location = new Point(275, 12);
             btnSearch.Margin = new Padding(0, 3, 3, 3);
             btnSearch.Name = "btnSearch";
             btnSearch.Padding = new Padding(3, 0, 0, 0);
@@ -88,7 +87,7 @@
             dgvOptLog.AllowUserToDeleteRows = false;
             dgvOptLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvOptLog.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvOptLog.Columns.AddRange(new DataGridViewColumn[] { Action, Message, EmpId, UserName, LogTime });
+            dgvOptLog.Columns.AddRange(new DataGridViewColumn[] { Action, FunctionName, EmployeeID, UserName, LogTime });
             dgvOptLog.Location = new Point(12, 46);
             dgvOptLog.Name = "dgvOptLog";
             dgvOptLog.ReadOnly = true;
@@ -98,24 +97,24 @@
             // 
             // Action
             // 
-            Action.DataPropertyName = "ACT_ID";
+            Action.DataPropertyName = "ACT_NM";
             Action.HeaderText = "操作";
             Action.Name = "Action";
             Action.ReadOnly = true;
             // 
-            // Message
+            // FunctionName
             // 
-            Message.DataPropertyName = "MSG";
-            Message.HeaderText = "訊息";
-            Message.Name = "Message";
-            Message.ReadOnly = true;
+            FunctionName.DataPropertyName = "FUNC_NM";
+            FunctionName.HeaderText = "功能";
+            FunctionName.Name = "FunctionName";
+            FunctionName.ReadOnly = true;
             // 
-            // EmpId
+            // EmployeeID
             // 
-            EmpId.DataPropertyName = "CRT_USER";
-            EmpId.HeaderText = "工號";
-            EmpId.Name = "EmpId";
-            EmpId.ReadOnly = true;
+            EmployeeID.DataPropertyName = "EMP_ID";
+            EmployeeID.HeaderText = "工號";
+            EmployeeID.Name = "EmployeeID";
+            EmployeeID.ReadOnly = true;
             // 
             // UserName
             // 
@@ -126,7 +125,7 @@
             // 
             // LogTime
             // 
-            LogTime.DataPropertyName = "CRT_DATE";
+            LogTime.DataPropertyName = "LOG_DATE";
             LogTime.HeaderText = "時間";
             LogTime.Name = "LogTime";
             LogTime.ReadOnly = true;
@@ -155,8 +154,8 @@
         private FontAwesome.Sharp.IconButton btnSearch;
         private DataGridView dgvOptLog;
         private DataGridViewTextBoxColumn Action;
-        private DataGridViewTextBoxColumn Message;
-        private DataGridViewTextBoxColumn EmpId;
+        private DataGridViewTextBoxColumn FunctionName;
+        private DataGridViewTextBoxColumn EmployeeID;
         private DataGridViewTextBoxColumn UserName;
         private DataGridViewTextBoxColumn LogTime;
     }

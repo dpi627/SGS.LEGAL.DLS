@@ -5,6 +5,7 @@ using SGS.LEGAL.DLS.Repository.Condition;
 using SGS.LEGAL.DLS.Repository;
 using SGS.LEGAL.DLS.Service.Info;
 using SGS.LEGAL.DLS.Service.ResultModel;
+using SGS.LEGAL.DLS.Repository.DataModel;
 
 namespace SGS.LEGAL.DLS.Service
 {
@@ -23,13 +24,14 @@ namespace SGS.LEGAL.DLS.Service
 
         public IList<OptLogResultModel> Get(OptLogInfo Info)
         {
-            // Info 轉為搜尋條件 Condition
+            // convert DTO => Info to Condition
             var condition = _mapper.Map<OptLogCondition>(Info);
+            // create Repository, then get data (DTO collection)
             using OptLogRepo repo = new(_user);
-            // 使用搜尋條件 Condition 取得底層 repo 資料集合 DataModel
-            var result = repo.Read(condition);
-            // DataModel 轉為 Service 層的資料集合 ResultModel
-            var data = _mapper.Map<IList<OptLogResultModel>>(result);
+            IList<OptLogDataModel>? result = repo.Read(condition);
+            // convert DTO => DataModel to ResultModel
+            IList<OptLogResultModel>? data = _mapper.Map<IList<OptLogResultModel>>(result);
+            // return DTO collection
             return data;
         }
 

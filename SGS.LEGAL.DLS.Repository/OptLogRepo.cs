@@ -19,7 +19,6 @@ namespace SGS.LEGAL.DLS.Repository
 
         public IList<OptLogDataModel> Read(OptLogCondition condition)
         {
-            //where條件組成
             arrParam = new ArrayList
             {
                 condition.DATE_START == null ? "" : "o.CRT_DATE >= @DATE_START",
@@ -27,14 +26,19 @@ namespace SGS.LEGAL.DLS.Repository
             };
 
             strSql = $@"
-                select 
+                select top 100
                     o.*
-                    ,p.P_TXT 
+                    ,p0.P_TXT as ACT_NM
+                    ,p1.P_TXT as FUNC_NM
+                    ,u.USER_NM as USER_NM
                 from OPT_LOG o 
-                    left join SYS_PARAM p on p.P_CLS='ACTION' and p.P_VAL=o.ACT_ID
+                    left join SYS_PARAM p0 on p0.P_CLS='ACTION' and p0.P_VAL=o.ACT_ID
+                    left join SYS_PARAM p1 on p1.P_CLS='FUNCTION' and p1.P_VAL=o.MSG
+                    left join SYS_USER u on u.EMP_ID=o.CRT_USER
                 where 1=1 {ParamStr}
                 order by o.LOG_ID desc
             ";
+
             return ExecuteQuery<OptLogDataModel>(strSql, condition);
         }
 

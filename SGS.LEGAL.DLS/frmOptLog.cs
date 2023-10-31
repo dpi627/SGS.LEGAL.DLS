@@ -24,6 +24,15 @@ namespace SGS.LEGAL.DLS
             var configMap = new MapperConfiguration(cfg => cfg.AddProfile<OptLogMapping>());
             _mapper = configMap.CreateMapper();
             dtpStartDate.Value = DateTime.Now.AddDays(-7);
+
+            dgvOptLog.AutoGenerateColumns = false;
+            dgvOptLog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            DataGridViewCellStyle cellStyle = new();
+            cellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvOptLog.DefaultCellStyle = cellStyle;
+
+            dgvOptLog.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

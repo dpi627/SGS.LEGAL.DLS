@@ -15,8 +15,8 @@ namespace SGS.LEGAL.DLS.Mapping
                 .ReverseMap();
 
             CreateMap<OptLogResultModel, OptLogViewModel>()
-                //.ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => $"{src.Id:000}-{src.Name}"))
-                //.ForMember(dest => dest.TIME_STAMP, opt => opt.MapFrom(src => $"{src.CRT_DATE:yyyy/MM/dd HH:mm:ss}"))
+                .ForMember(dest => dest.EMP_ID, opt => opt.MapFrom(src => src.CRT_USER))
+                .ForMember(dest => dest.LOG_DATE, opt => opt.MapFrom(src => $"{src.CRT_DATE:yyyy/MM/dd HH:mm:ss}"))
                 .ReverseMap();
 
             // ...other mappings
