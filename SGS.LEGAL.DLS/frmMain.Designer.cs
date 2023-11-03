@@ -38,6 +38,7 @@
             btnUserInfo = new FontAwesome.Sharp.IconButton();
             btnNotify = new FontAwesome.Sharp.IconButton();
             panTitle = new Panel();
+            linkHelp = new LinkLabel();
             labTitle = new Label();
             statusStrip1 = new StatusStrip();
             labVersion = new ToolStripStatusLabel();
@@ -45,7 +46,6 @@
             labUser = new ToolStripStatusLabel();
             progressBar1 = new CustomProgressBar();
             panContent = new Panel();
-            linkHelp = new LinkLabel();
             panMenu.SuspendLayout();
             panTitle.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -177,6 +177,7 @@
             btnUsage.Text = "操作紀錄";
             btnUsage.TextAlign = ContentAlignment.MiddleRight;
             btnUsage.UseVisualStyleBackColor = false;
+            btnUsage.Click += btnUsage_Click;
             // 
             // btnUserInfo
             // 
@@ -240,6 +241,22 @@
             panTitle.Name = "panTitle";
             panTitle.Size = new Size(919, 50);
             panTitle.TabIndex = 1;
+            // 
+            // linkHelp
+            // 
+            linkHelp.ActiveLinkColor = Color.DimGray;
+            linkHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            linkHelp.AutoSize = true;
+            linkHelp.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            linkHelp.LinkColor = Color.Tomato;
+            linkHelp.Location = new Point(873, 21);
+            linkHelp.Name = "linkHelp";
+            linkHelp.Size = new Size(34, 15);
+            linkHelp.TabIndex = 2;
+            linkHelp.TabStop = true;
+            linkHelp.Text = "Help";
+            linkHelp.VisitedLinkColor = Color.Tomato;
+            linkHelp.LinkClicked += linkHelp_LinkClicked;
             // 
             // labTitle
             // 
@@ -305,22 +322,6 @@
             panContent.Name = "panContent";
             panContent.Size = new Size(919, 486);
             panContent.TabIndex = 4;
-            // 
-            // linkHelp
-            // 
-            linkHelp.ActiveLinkColor = Color.DimGray;
-            linkHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            linkHelp.AutoSize = true;
-            linkHelp.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            linkHelp.LinkColor = Color.Tomato;
-            linkHelp.Location = new Point(873, 21);
-            linkHelp.Name = "linkHelp";
-            linkHelp.Size = new Size(34, 15);
-            linkHelp.TabIndex = 2;
-            linkHelp.TabStop = true;
-            linkHelp.Text = "Help";
-            linkHelp.VisitedLinkColor = Color.Tomato;
-            linkHelp.LinkClicked += linkHelp_LinkClicked;
             // 
             // frmMain
             // 

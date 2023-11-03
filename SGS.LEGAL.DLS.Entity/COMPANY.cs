@@ -41,10 +41,10 @@ namespace SGS.LEGAL.DLS.Entity
         /// <summary>
         /// 郵遞區號前三碼
         /// </summary>
-        public string? COM_POST_CODE_1 => COM_POST_CODE?[..3];
+        public string COM_POST_CODE_1 => string.Join(" ", COM_POST_CODE![..3].ToCharArray());
         /// <summary>
         /// 郵遞區號第四碼到最後
         /// </summary>
-        public string? COM_POST_CODE_2 => COM_POST_CODE?[3..];
+        public string COM_POST_CODE_2 => string.Join(" ", COM_POST_CODE![3..].ToCharArray());
     }
 }

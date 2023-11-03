@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SGS.LEGAL.DLS.Repository.DataModel
 {
-    public class OptLogDataModel
+    public record OptLogDataModel
     {
+        public long LOG_ID { get; set; }
+        public int ACT_ID { get; set; }
+        public string? MSG { get; set; }
+        public string? MEMO { get; set; }
+        public DateTime CRT_DATE { get; set; }
+        public string? CRT_USER { get; set; }
+        public string? ACT_NM { get; set; }
+        public string? FUNC_NM { get; set; }
+        public string? USER_NM { get; set; }
     }
 }

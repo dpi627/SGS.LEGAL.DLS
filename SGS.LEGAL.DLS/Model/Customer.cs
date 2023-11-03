@@ -26,10 +26,10 @@ namespace SGS.LEGAL.DLS.Model
         /// <summary>
         /// 郵遞區號前三碼
         /// </summary>
-        public string? CST_POST_CODE_1 => CST_POST_CODE?[..3];
+        public string CST_POST_CODE_1 => string.Join(" ", CST_POST_CODE![..3].ToCharArray());
         /// <summary>
         /// 郵遞區號第四碼到最後
         /// </summary>
-        public string? CST_POST_CODE_2 => CST_POST_CODE?[3..];
+        public string CST_POST_CODE_2 => string.Join(" ", CST_POST_CODE![3..].ToCharArray());
     }
 }
