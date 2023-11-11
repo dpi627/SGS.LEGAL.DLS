@@ -12,6 +12,7 @@ namespace SGS.LEGAL.DLS.Model
         private string impPassword = "OADApplicationPW!@#$%^02";
         private string impUserID = "efile_tw";
 
+        #region property
         /// <summary>
         /// 目前使用者
         /// </summary>
@@ -36,6 +37,15 @@ namespace SGS.LEGAL.DLS.Model
         /// 印表機紙匣 (預設第一台的紙匣)
         /// </summary>
         public List<PaperSource> DefaultPaperSources { get; set; }
+        /// <summary>
+        /// 自動更新設定檔路徑
+        /// </summary>
+        public string? UploadSettingFullPath { get; set; }
+        /// <summary>
+        /// 使用手冊路徑
+        /// </summary>
+        public string? UserManualFullPath { get; set; }
+        #endregion
 
         /// <summary>
         /// 取得目前電腦AD帳號，取出工號後，再取得完整使用者資料
@@ -64,6 +74,21 @@ namespace SGS.LEGAL.DLS.Model
             }
 
             this.Impersonator = new Impersonator(impUserID, impPassword);
+            return this;
+        }
+
+        /// <summary>
+        /// 設定通用系統參數
+        /// </summary>
+        /// <returns></returns>
+        public FormConfig SetSystemData()
+        {
+            using SysParamService svc = new(this.CurrentUser);
+            IList<SYS_PARAM>? sys = svc.Get("SYSTEM")!;
+            //檔案類型
+            this.UploadSettingFullPath = sys.Where(p=>p.P_VAL=="AU").FirstOrDefault()?.EXT_1;
+            //催款函類型
+            this.UserManualFullPath = sys.Where(p => p.P_VAL == "UM").FirstOrDefault()?.EXT_1;
             return this;
         }
 
