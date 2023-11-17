@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Reflection;
 using SGS.LIB.Common;
 using SGS.LEGAL.DLS.Entity;
+using SGS.LIMS.DB;
 
 namespace SGS.LEGAL.DLS.Repository
 {
@@ -34,10 +35,20 @@ namespace SGS.LEGAL.DLS.Repository
         /// </summary>
         private void SetConnectionString()
         {
-            // TODO: 要改抓資料庫
             if (!string.IsNullOrEmpty(strConn)) return;
-            using ConfigReader? cr = new();
-            strConn = cr.GetConnStr("UAT");
+
+            using SGS.LIB.Common.ConfigReader cr = new();
+
+            Dictionary<string, string?>? cfg = cr.GetSection(
+                cr.GetValue("Enviroment")!,
+                "Databases"
+                );
+
+            DbInfo? db = new DbInfo(cfg["Server"], cfg["Database"]);
+            strConn = db.ConnectionString;
+
+            //using ConfigReader? cr = new();
+            //strConn = cr.GetConnStr("UAT");
         }
 
         /// <summary>

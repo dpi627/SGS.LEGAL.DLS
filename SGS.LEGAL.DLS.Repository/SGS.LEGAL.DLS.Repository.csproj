@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SGS.LIMS.DB\SGS.LIMS.DB\SGS.LIMS.DB.csproj" />
     <ProjectReference Include="..\SGS.LEGAL.DLS.Common\SGS.LIB.Common.csproj" />
     <ProjectReference Include="..\SGS.LEGAL.DLS.Entity\SGS.LEGAL.DLS.Entity.csproj" />
   </ItemGroup>

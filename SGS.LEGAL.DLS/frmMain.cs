@@ -25,7 +25,8 @@ namespace SGS.LEGAL.DLS
             #region Debug / Release 模式下的設定
 #if RELEASE
             AutoUpdater.RunUpdateAsAdmin = false;
-            AutoUpdater.Start(@"\\twfs007\SGSSHARE\OAD\Brian\_Auto_Update\SGS.LEGAL.DLS\info.xml");
+            //AutoUpdater.Start(@"\\twfs007\SGSSHARE\OAD\Brian\_Auto_Update\SGS.LEGAL.DLS\info.xml");
+            AutoUpdater.Start(_config.UploadSettingFullPath);
             btnDemo.Visible = false;
 #endif
 #if DEBUG
@@ -124,7 +125,7 @@ namespace SGS.LEGAL.DLS
 
         private void linkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new frmSplash(false).ShowDialog();
+            new frmSplash(false, _config).ShowDialog();
         }
 
         private void btnUsage_Click(object sender, EventArgs e)

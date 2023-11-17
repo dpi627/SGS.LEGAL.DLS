@@ -16,10 +16,6 @@ namespace SGS.LEGAL.DLS
 {
     public partial class frmDunningLetter : Form
     {
-        ////TODO: impersonator 帳號密碼可改為設定檔或資料庫取得
-        //string impUserID = "efile_tw";
-        //string impPassword = "OADApplicationPW!@#$%^02";
-
         private IMapper? _mapper;
         private readonly FormConfig? config;
         private readonly LongOperation? loader;

@@ -47,11 +47,6 @@ namespace SGS.LIB.Common
             GC.SuppressFinalize(this);
         }
 
-        ~ConfigReader()
-        {
-            Dispose(false);
-        }
-
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)

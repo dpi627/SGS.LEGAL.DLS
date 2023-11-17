@@ -42,6 +42,7 @@
             label5 = new Label();
             btnClose = new Button();
             labMsg = new Label();
+            lnkUserManual = new LinkLabel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -134,20 +135,21 @@
             panel2.BackColor = Color.Tomato;
             panel2.Location = new Point(12, 153);
             panel2.Name = "panel2";
-            panel2.Size = new Size(3, 50);
+            panel2.Size = new Size(5, 68);
             panel2.TabIndex = 7;
             panel2.Visible = false;
             // 
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
+            panel1.Controls.Add(lnkUserManual);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(label5);
             panel1.ForeColor = Color.White;
             panel1.Location = new Point(21, 153);
             panel1.Name = "panel1";
-            panel1.Size = new Size(129, 50);
+            panel1.Size = new Size(129, 68);
             panel1.TabIndex = 6;
             panel1.Visible = false;
             // 
@@ -212,6 +214,20 @@
             labMsg.TabIndex = 9;
             labMsg.Text = "msg...";
             // 
+            // lnkUserManual
+            // 
+            lnkUserManual.ActiveLinkColor = Color.Gold;
+            lnkUserManual.AutoSize = true;
+            lnkUserManual.LinkColor = Color.Tomato;
+            lnkUserManual.Location = new Point(0, 51);
+            lnkUserManual.Name = "lnkUserManual";
+            lnkUserManual.Size = new Size(109, 15);
+            lnkUserManual.TabIndex = 4;
+            lnkUserManual.TabStop = true;
+            lnkUserManual.Text = "下載使用手冊(PDF)";
+            lnkUserManual.VisitedLinkColor = Color.FromArgb(214, 118, 25);
+            lnkUserManual.LinkClicked += lnkUserManual_LinkClicked;
+            // 
             // frmSplash
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -258,5 +274,6 @@
         private Label label5;
         private Button btnClose;
         private Label labMsg;
+        private LinkLabel lnkUserManual;
     }
 }

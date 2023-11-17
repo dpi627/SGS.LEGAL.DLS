@@ -1,4 +1,6 @@
-﻿using SGS.LEGAL.DLS.Model;
+﻿//using Aspose.Pdf.Forms;
+using SGS.LEGAL.DLS.Model;
+using SGS.LEGAL.DLS.Service;
 using System.Diagnostics;
 
 namespace SGS.LEGAL.DLS
@@ -7,11 +9,13 @@ namespace SGS.LEGAL.DLS
     {
         bool _isInit = false; // 是否為程式初始化，是的話會執行初始化動作並顯示進度
         int _delay = 300; // delay time between each step task
+        FormConfig? _config = null;
 
-        public frmSplash(bool isInit = true)
+        public frmSplash(bool isInit = true, FormConfig? config = null)
         {
             InitializeComponent();
-            _isInit = isInit;
+            this._isInit = isInit;
+            this._config = config;
             labMsg.Text = "";
         }
 
@@ -45,7 +49,7 @@ namespace SGS.LEGAL.DLS
                     // 顯示主畫面
                     ShowMainForm(config);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "系統異常", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
@@ -111,6 +115,8 @@ namespace SGS.LEGAL.DLS
                 await Task.Delay(_delay);
                 await Task.Run(() => { ShowMsg("設定目前使用者", 20); config.SetCurrentUser(); });
                 await Task.Delay(_delay);
+                await Task.Run(() => { ShowMsg("設定系統參數", 30); config.SetSystemData(); });
+                await Task.Delay(_delay);
                 await Task.Run(() => { ShowMsg("設定特殊IO帳號", 70); config.SetImpersonator(); });
                 await Task.Delay(_delay);
                 await Task.Run(() => { ShowMsg("設定通用資料", 80); config.SetCommonData(); });
@@ -166,6 +172,24 @@ namespace SGS.LEGAL.DLS
             circularProgressBar1.Value = nextValue > circularProgressBar1.Maximum ? circularProgressBar1.Maximum : nextValue;
             // 更新中心顯示文字
             circularProgressBar1.Text = circularProgressBar1.Value.ToString();
+        }
+
+        private void lnkUserManual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (_config == null)
+                return;
+
+            // 下載檔案到暫存資料夾
+            string tempPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp");
+            using FileService svc = new FileService(_config.CurrentUser, _config.Impersonator);
+            string tempFullPath = svc.SetRemoteFullPath(_config.UserManualFullPath!)
+                .SetTempPath(tempPath)
+                .Download()
+                .TempFullPath;
+            // 從暫存資料夾複製到下載
+            string downloadPath = svc.CopyFileToDownload(tempFullPath);
+            Process.Start("explorer.exe", downloadPath);
+            this.Close();
         }
     }
 }
