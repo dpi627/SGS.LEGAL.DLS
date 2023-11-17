@@ -74,13 +74,17 @@ namespace SGS.LEGAL.DLS.Model
             }
             else
             {
+                using SGS.LIB.Common.ConfigReader cr = new();
+
+                Dictionary<string, string?>? imp = cr.GetSection(
+                    cr.GetValue("Enviroment")!,
+                    "Impersonators"
+                    );
+
                 DbInfo db = new(
-                    "TWDB009",
-                    "DLS_UAT",
-                    new DbOption()
-                    {
-                        DbRole = dbRole.db_filewriter,
-                    }
+                    imp["Server"],
+                    imp["Database"],
+                    imp["Role"]
                 );
 
                 this.impUserID = db.ID_Decrypt;

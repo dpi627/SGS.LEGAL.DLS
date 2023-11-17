@@ -37,7 +37,14 @@ namespace SGS.LEGAL.DLS.Repository
         {
             if (!string.IsNullOrEmpty(strConn)) return;
 
-            DbInfo? db = new DbInfo("TWDB009","DLS_UAT");
+            using SGS.LIB.Common.ConfigReader cr = new();
+
+            Dictionary<string, string?>? cfg = cr.GetSection(
+                cr.GetValue("Enviroment")!,
+                "Databases"
+                );
+
+            DbInfo? db = new DbInfo(cfg["Server"], cfg["Database"]);
             strConn = db.ConnectionString;
 
             //using ConfigReader? cr = new();
