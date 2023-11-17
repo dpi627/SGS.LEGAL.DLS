@@ -3,14 +3,14 @@ using System.Drawing.Printing;
 using SGS.LEGAL.DLS.Entity;
 using SGS.LEGAL.DLS.Service;
 using SGS.LIB.Common;
+using SGS.LIMS.DB;
 
 namespace SGS.LEGAL.DLS.Model
 {
     public record FormConfig
     {
-        // TODO: 要改抓資料庫
-        private string impPassword = "OADApplicationPW!@#$%^02";
-        private string impUserID = "efile_tw";
+        private string? impPassword = null;
+        private string? impUserID = null;
 
         #region property
         /// <summary>
@@ -67,10 +67,28 @@ namespace SGS.LEGAL.DLS.Model
         /// <param name="impPWD">AD密碼</param>
         public FormConfig SetImpersonator(string? impUID = null, string? impPWD = null)
         {
-            if (impUID !=null && impPWD != null)
+            if (impUID != null && impPWD != null)
             {
                 this.impUserID = impUID;
                 this.impPassword = impPWD;
+            }
+            else
+            {
+                using SGS.LIB.Common.ConfigReader cr = new();
+
+                Dictionary<string, string?>? imp = cr.GetSection(
+                    cr.GetValue("Enviroment")!,
+                    "Impersonators"
+                    );
+
+                DbInfo db = new(
+                    imp["Server"],
+                    imp["Database"],
+                    imp["Role"]
+                );
+
+                this.impUserID = db.ID_Decrypt;
+                this.impPassword = db.PW_Decrypt;
             }
 
             this.Impersonator = new Impersonator(impUserID, impPassword);
@@ -86,7 +104,7 @@ namespace SGS.LEGAL.DLS.Model
             using SysParamService svc = new(this.CurrentUser);
             IList<SYS_PARAM>? sys = svc.Get("SYSTEM")!;
             //檔案類型
-            this.UploadSettingFullPath = sys.Where(p=>p.P_VAL=="AU").FirstOrDefault()?.EXT_1;
+            this.UploadSettingFullPath = sys.Where(p => p.P_VAL == "AU").FirstOrDefault()?.EXT_1;
             //催款函類型
             this.UserManualFullPath = sys.Where(p => p.P_VAL == "UM").FirstOrDefault()?.EXT_1;
             return this;
@@ -110,7 +128,7 @@ namespace SGS.LEGAL.DLS.Model
         /// 設定本機印表機與紙匣
         /// </summary>
         public FormConfig SetPrinter()
-        { 
+        {
             // 取得本機的印表機清單，排除 Fax 與 無紙匣 項目
             this.DefaultPrinters = PrinterHelper.GetLocalPrinters();
             // 取得印表機的紙匣結構清單，排除 RawKind >= 1000 的項目
