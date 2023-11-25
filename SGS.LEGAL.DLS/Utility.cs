@@ -135,17 +135,15 @@ namespace SGS.LEGAL.DLS
         {
             try
             {
-                // 取得目前執行程式的使用者身分識別
+                // 取得目前執行程式的使用者識別
                 WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent();
-                // 使用使用者身分識別來建立使用者主體物件
-                UserPrincipal currentUser = new UserPrincipal(new PrincipalContext(ContextType.Domain))
-                {
-                    SamAccountName = currentIdentity.Name.Split('\\')[1] // 取得使用者名稱
-                };
-                // 使用使用者主體物件來進行查詢
-                PrincipalSearcher searcher = new PrincipalSearcher(currentUser);
-                UserPrincipal user = (UserPrincipal)searcher.FindOne();
-                return user;
+                // 建立簡易結構
+                string[] data = currentIdentity.Name.Split('\\');
+                var (Domain, UserID) = (data[0], data[1]);
+                // 建立 Windows 主體環境
+                using PrincipalContext context = new(ContextType.Domain, Domain);
+                // 取得使用者資料
+                return UserPrincipal.FindByIdentity(context, IdentityType.SamAccountName, UserID);
             }
             catch (Exception ex)
             {
