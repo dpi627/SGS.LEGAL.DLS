@@ -188,7 +188,14 @@ namespace SGS.LEGAL.DLS
                 .TempFullPath;
             // 從暫存資料夾複製到下載
             string downloadPath = svc.CopyFileToDownload(tempFullPath);
-            Process.Start("explorer.exe", downloadPath);
+
+            ProcessStartInfo psi = new()
+            {
+                FileName = downloadPath,
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+            
             this.Close();
         }
     }
