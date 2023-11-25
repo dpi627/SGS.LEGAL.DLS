@@ -108,6 +108,7 @@
             txtCST_DEPT.Location = new Point(92, 58);
             txtCST_DEPT.Name = "txtCST_DEPT";
             txtCST_DEPT.PlaceholderText = "客戶部門";
+            txtCST_DEPT.ReadOnly = true;
             txtCST_DEPT.Size = new Size(160, 28);
             txtCST_DEPT.TabIndex = 1;
             // 
