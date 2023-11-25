@@ -223,7 +223,7 @@ namespace SGS.LEGAL.DLS.Service
             // 複製檔案
             File.Copy(SourceFullPath, targetFullPath, true);
 
-            return downloadFolderPath;
+            return targetFullPath;
         }
     }
 }
