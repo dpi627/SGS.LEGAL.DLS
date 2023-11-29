@@ -16,6 +16,7 @@
         public string CC_NM { get; set; } = "";
         public string CC_POST_CODE { get; set; } = "";
         public string CC_ADDR { get; set; } = "";
+        public string CC_CEO { get; set; } = "";
         public string AMT_NM { get; set; } = "";
     }
 }

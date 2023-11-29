@@ -109,6 +109,7 @@ namespace SGS.LEGAL.DLS
             DepositContact.CC_NM = txtCcName.Text;
             DepositContact.CC_POST_CODE = txtCcPostCode.Text;
             DepositContact.CC_ADDR = txtCcAddress.Text;
+            DepositContact.CC_CEO = txtCcCEO.Text;
 
             /// 無論總公司或分公司，收件回執之收件地址皆為總公司地址
             /// 總公司抓公司列表中，"無"分公司代碼(BRANCH_CODE)之資料
