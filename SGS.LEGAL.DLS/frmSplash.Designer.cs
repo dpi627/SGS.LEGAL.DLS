@@ -32,17 +32,16 @@
             labTitle = new Label();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
             circularProgressBar1 = new CircularProgressBar_NET5.CircularProgressBar();
             timer1 = new System.Windows.Forms.Timer(components);
             panel2 = new Panel();
             panel1 = new Panel();
+            lnkUserManual = new LinkLabel();
             label4 = new Label();
             linkLabel1 = new LinkLabel();
             label5 = new Label();
             btnClose = new Button();
             labMsg = new Label();
-            lnkUserManual = new LinkLabel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,9 +65,9 @@
             label1.ForeColor = Color.DimGray;
             label1.Location = new Point(9, 80);
             label1.Name = "label1";
-            label1.Size = new Size(246, 35);
+            label1.Size = new Size(348, 35);
             label1.TabIndex = 3;
-            label1.Text = "催 款 函 管 理 系 統";
+            label1.Text = "催 款 函 製 作 暨 管 理 系 統";
             // 
             // label2
             // 
@@ -76,23 +75,11 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Consolas", 8F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(404, 331);
+            label2.Location = new Point(323, 346);
             label2.Name = "label2";
-            label2.Size = new Size(235, 13);
+            label2.Size = new Size(319, 13);
             label2.TabIndex = 4;
-            label2.Text = "2023 © Copyright. SGS Taiwan Ltd., Co.";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Consolas", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(415, 345);
-            label3.Name = "label3";
-            label3.Size = new Size(223, 13);
-            label3.TabIndex = 5;
-            label3.Text = "OAD present, build by Brian Li #1429";
+            label2.Text = "Copyright © 2023 SGS Taiwan Ltd. All Right Reserved.";
             // 
             // circularProgressBar1
             // 
@@ -152,6 +139,20 @@
             panel1.Size = new Size(129, 68);
             panel1.TabIndex = 6;
             panel1.Visible = false;
+            // 
+            // lnkUserManual
+            // 
+            lnkUserManual.ActiveLinkColor = Color.Gold;
+            lnkUserManual.AutoSize = true;
+            lnkUserManual.LinkColor = Color.Tomato;
+            lnkUserManual.Location = new Point(0, 51);
+            lnkUserManual.Name = "lnkUserManual";
+            lnkUserManual.Size = new Size(109, 15);
+            lnkUserManual.TabIndex = 4;
+            lnkUserManual.TabStop = true;
+            lnkUserManual.Text = "下載使用手冊(PDF)";
+            lnkUserManual.VisitedLinkColor = Color.FromArgb(214, 118, 25);
+            lnkUserManual.LinkClicked += lnkUserManual_LinkClicked;
             // 
             // label4
             // 
@@ -214,20 +215,6 @@
             labMsg.TabIndex = 9;
             labMsg.Text = "msg...";
             // 
-            // lnkUserManual
-            // 
-            lnkUserManual.ActiveLinkColor = Color.Gold;
-            lnkUserManual.AutoSize = true;
-            lnkUserManual.LinkColor = Color.Tomato;
-            lnkUserManual.Location = new Point(0, 51);
-            lnkUserManual.Name = "lnkUserManual";
-            lnkUserManual.Size = new Size(109, 15);
-            lnkUserManual.TabIndex = 4;
-            lnkUserManual.TabStop = true;
-            lnkUserManual.Text = "下載使用手冊(PDF)";
-            lnkUserManual.VisitedLinkColor = Color.FromArgb(214, 118, 25);
-            lnkUserManual.LinkClicked += lnkUserManual_LinkClicked;
-            // 
             // frmSplash
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -240,7 +227,6 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(circularProgressBar1);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(labTitle);
@@ -264,7 +250,6 @@
         private Label labTitle;
         private Label label1;
         private Label label2;
-        private Label label3;
         private CircularProgressBar_NET5.CircularProgressBar circularProgressBar1;
         private System.Windows.Forms.Timer timer1;
         private Panel panel2;
