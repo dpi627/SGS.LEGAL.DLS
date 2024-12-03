@@ -60,8 +60,11 @@ namespace SGS.LEGAL.DLS.Service
         public void ReadExcelAndCreateData(string file)
         {
             Workbook? workbook = null;
+            BOSS_DAILY? data = null;
+            int count = 0;
             try
             {
+                Logger.Information("Read Excel: {file}", file);
                 workbook = new(file);
                 Worksheet worksheet = workbook.Worksheets[0];
                 // 資料起始
@@ -72,7 +75,7 @@ namespace SGS.LEGAL.DLS.Service
                     // 取得目前資料列
                     Row r = worksheet.Cells.Rows[i];
                     // 建立並取得 BOSS_DAILY 結構化資料
-                    BOSS_DAILY data = GetBossDailyData(r);
+                    data = GetBossDailyData(r);
 
 #if DEBUG
                     if (data.CURR != "TWD") continue; // 只處理台幣
@@ -80,11 +83,14 @@ namespace SGS.LEGAL.DLS.Service
 
                     // 寫入資料
                     repo.Create(data);
-                    Logger.Information($"Add {data.COMPANY} {data.BOSS_NO} {data.INV_NO} {data.INV_AMT} {data.CURR}");
+                    //Logger.Information($"Add {data.COMPANY} {data.BOSS_NO} {data.INV_NO} {data.INV_AMT} {data.CURR}");
+                    count++;
                 }
+                Logger.Information("Add {count} data", count);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Error(ex, "Create Data failed: {@data}", data);
                 throw;
             }
             finally
