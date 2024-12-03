@@ -1,4 +1,5 @@
 ﻿//using Aspose.Pdf.Forms;
+using Serilog;
 using SGS.LEGAL.DLS.Model;
 using SGS.LEGAL.DLS.Service;
 using System.Diagnostics;
@@ -42,6 +43,8 @@ namespace SGS.LEGAL.DLS
                 {
                     // 建立各種表單初始化設定，並回報內容與進度
                     FormConfig config = await SetFormConfigAsync();
+                    Log.Information("完成設 {@config}", config);
+
                     // 直接設定為完成
                     AddProgress(100);
                     // 暫停讓 UI 得以更新 (不然會顯示 90 幾就跳掉)
@@ -128,7 +131,8 @@ namespace SGS.LEGAL.DLS
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Error(ex, "設定異常");
+                throw;
             }
         }
 
@@ -195,7 +199,7 @@ namespace SGS.LEGAL.DLS
                 UseShellExecute = true
             };
             Process.Start(psi);
-            
+
             this.Close();
         }
     }
