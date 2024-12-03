@@ -24,7 +24,7 @@ namespace SGS.LEGAL.DLS.Repository
                 model.COMPANY == null ? "" : "bd.COMPANY = @COMPANY",
                 model.BD_STA == null? "" : "bd.BD_STA = @BD_STA",
 				model.KEYWORD == null ? "" : "(bd.CST_NM like '%'+@KEYWORD+'%' or bd.CST_NO like '%'+@KEYWORD+'%' or bd.BOSS_NO like '%'+@KEYWORD+'%')",
-				(model.DATE_S == null || model.DATE_E == null) ? "" : "bd.INV_DT >= @DATE_S",
+				(model.DATE_S == null || model.DATE_E == null) ? "" : "bd.INV_DT >= @DATE_S and bd.INV_DT <= @DATE_E",
             };
 
             //sql語法組成

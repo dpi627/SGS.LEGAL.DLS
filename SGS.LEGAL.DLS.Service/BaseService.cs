@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using SGS.LEGAL.DLS.Entity;
+using System.Reflection;
 
 namespace SGS.LEGAL.DLS.Service
 {
@@ -12,7 +13,11 @@ namespace SGS.LEGAL.DLS.Service
 
         static BaseService()
         {
+            Serilog.Debugging.SelfLog.Enable(msg => Console.Error.WriteLine(msg));
+            var appName = Assembly.GetEntryAssembly()?.GetName().Name ?? "SGS.LEGAL.DLS";
+
             Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
                 .WriteTo.Console()
                 .WriteTo.Debug()
                 .WriteTo.File(
@@ -20,6 +25,12 @@ namespace SGS.LEGAL.DLS.Service
                     rollingInterval: RollingInterval.Day,
                     outputTemplate: "{Timestamp:HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
                 )
+                .WriteTo.Seq("http://twtpeoad002:5341/")
+                .Enrich.WithEnvironmentName()
+                .Enrich.WithEnvironmentUserName()
+                .Enrich.WithMachineName()
+                .Enrich.WithThreadId()
+                .Enrich.WithProperty("Application", appName)
                 .CreateLogger();
 
             try

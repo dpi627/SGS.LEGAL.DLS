@@ -6,6 +6,7 @@ using System.Reflection;
 using SGS.LIB.Common;
 using SGS.LEGAL.DLS.Entity;
 using SGS.LIMS.DB;
+using SGS.OAD.DB;
 
 namespace SGS.LEGAL.DLS.Repository
 {
@@ -44,7 +45,13 @@ namespace SGS.LEGAL.DLS.Repository
                 "Databases"
                 );
 
-            DbInfo? db = new DbInfo(cfg["Server"], cfg["Database"]);
+            var db = DbInfoBuilder.Init()
+                .SetServer(cfg["Server"])
+                .SetDatabase(cfg["Database"])
+                .SetAppName(Assembly.GetEntryAssembly()?.GetName().Name ?? "SGS.LEGAL.DLS")
+                .Build();
+
+            //DbInfo? db = new DbInfo(cfg["Server"], cfg["Database"]);
             strConn = db.ConnectionString;
 
             //using ConfigReader? cr = new();

@@ -36,7 +36,7 @@ namespace SGS.LEGAL.DLS.Service
             Logger.Information("Start {ImportType} import", IsManual ? "Manual" : "Auto");
             model.IS_MANUAL = IsManual;
             CreateDataImport(IsManual);
-            Logger.Information($"Create Import ID: {model.DI_ID}");
+            Logger.Information("Create Import ID: {ImportID}", model.DI_ID);
 
             // 取得公司資料
             using SysParamRepo p = new(user);

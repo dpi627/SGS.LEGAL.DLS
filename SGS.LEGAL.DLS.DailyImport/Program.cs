@@ -1,4 +1,5 @@
-﻿using SGS.LEGAL.DLS.Entity;
+﻿using Serilog;
+using SGS.LEGAL.DLS.Entity;
 using SGS.LEGAL.DLS.Service;
 
 namespace SGS.LEGAL.DLS.DailyImport
@@ -14,6 +15,8 @@ namespace SGS.LEGAL.DLS.DailyImport
                 );
             // 執行資料匯入
             di.ImportData();
+
+            Log.CloseAndFlush();
         }
     }
 }

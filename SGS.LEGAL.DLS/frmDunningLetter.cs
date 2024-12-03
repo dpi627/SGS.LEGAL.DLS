@@ -94,8 +94,8 @@ namespace SGS.LEGAL.DLS
             {
                 COMPANY = cbbCompany.SelectedValue.ToString(),
                 KEYWORD = txtKeyword.Text,
-                DATE_S = dtpStartDate.Value,
-                DATE_E = dtpEndDate.Value
+                DATE_S = dtpStartDate.Value.Date, //只取日期，時分秒會默認 00:00:00
+                DATE_E = dtpEndDate.Value.Date.AddDays(1).AddSeconds(-1) //時分秒改為 23:59:59
             };
 
             Utility.AddLog(
